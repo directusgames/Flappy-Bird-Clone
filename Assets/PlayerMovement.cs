@@ -28,5 +28,9 @@ public class PlayerMovement : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log (coll.gameObject.tag);
+        if(coll.gameObject.tag == "Obstacle")
+        {
+            //reset game
+        }
     }
 }
