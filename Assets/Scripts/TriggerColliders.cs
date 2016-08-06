@@ -6,7 +6,9 @@ public class TriggerColliders : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		switch (this.tag) {
-			case "createCollide":
+			case "createCollide":	
+				Debug.Log ("Creating new obstacle on createCollide");
+				m_obstacleManager.createObstacle ();
 				break;
 		}
 		Debug.Log ("collision start");
@@ -15,6 +17,8 @@ public class TriggerColliders : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D other) {
 		switch (this.tag) {
 			case "destroyCollide":
+				Debug.Log ("Creating new obstacle on createCollide");
+				m_obstacleManager.destroyObstacle (other);
 				break;
 		}
 		Debug.Log ("collision exit");

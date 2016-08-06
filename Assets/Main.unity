@@ -547,7 +547,7 @@ GameObject:
   - 114: {fileID: 926502618}
   m_Layer: 0
   m_Name: Destruction Collider
-  m_TagString: createCollide
+  m_TagString: destroyCollide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -812,7 +812,7 @@ GameObject:
   - 114: {fileID: 1584062711}
   m_Layer: 0
   m_Name: Construction Collider
-  m_TagString: Untagged
+  m_TagString: createCollide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

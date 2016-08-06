@@ -36,11 +36,12 @@ public class ObstacleManager : MonoBehaviour {
 			// Remove from game object list
 	}
 
-	void destroyObstacle(GameObject obstacle) {
-
+	public void destroyObstacle(Collider2D obstacle) {
+		// Determine parent obj from Collider?
+		// Or pass in from get go?
 	}
 
-	void createObstacle() {
+	public void createObstacle() {
 		// Create @ spawnOrigin.
 	}
 }
