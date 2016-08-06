@@ -8,14 +8,18 @@ public class ObstacleManager : MonoBehaviour {
 	public bool m_started = true;
 	public bool m_paused = false;
 
+	public GameObject m_obstaclePrefab;
+
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
 
-	private Vector3 m_spawnOrigin = new Vector3 (400f, 0f, 0f);
+	private Vector3 m_spawnOrigin = new Vector3 (825f, 0f, 0f);
 
 	// Use this for initialization
 	void Start () {
-		m_obstacleObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Obstacle"));
+		m_obstacleObjects = new List<GameObject>(
+			GameObject.FindGameObjectsWithTag("Obstacle")
+		);
 	}
 	
 	// Update is called once per frame
@@ -37,11 +41,17 @@ public class ObstacleManager : MonoBehaviour {
 	}
 
 	public void destroyObstacle(Collider2D obstacle) {
-		// Determine parent obj from Collider?
-		// Or pass in from get go?
+		GameObject obstacleContainer = obstacle.transform.parent.gameObject;
+		m_obstacleObjects.Remove (obstacleContainer);
+		Destroy (obstacleContainer);
 	}
 
 	public void createObstacle() {
-		// Create @ spawnOrigin.
+		GameObject newObs = (GameObject) Instantiate (
+			m_obstaclePrefab,
+			m_spawnOrigin,
+			Quaternion.identity
+		);
+		m_obstacleObjects.Add (newObs);
 	}
 }

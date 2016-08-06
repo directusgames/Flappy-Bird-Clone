@@ -340,7 +340,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602816557}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 400, y: 0, z: 0}
+  m_LocalPosition: {x: 600, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -543,7 +543,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 926502615}
   - 61: {fileID: 926502616}
-  - 50: {fileID: 926502617}
   - 114: {fileID: 926502618}
   m_Layer: 0
   m_Name: Destruction Collider
@@ -579,23 +578,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!50 &926502617
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 926502614}
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &926502618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +590,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_obstacleManager: {fileID: 1364650088}
+  m_create: 0
+  m_destroy: 0
 --- !u!1 &956109702
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +614,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 956109702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 200, y: 0, z: 0}
+  m_LocalPosition: {x: 300, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -718,6 +702,8 @@ MonoBehaviour:
   m_obstacleObjects: []
   m_started: 1
   m_paused: 0
+  m_obstaclePrefab: {fileID: 1000011694527062, guid: 1b05a0645e156094a903f3f75b04a44a,
+    type: 2}
   m_createCollider: {fileID: 1584062709}
   m_destroyCollider: {fileID: 926502616}
 --- !u!1 &1502520831
@@ -808,7 +794,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1584062708}
   - 61: {fileID: 1584062709}
-  - 50: {fileID: 1584062710}
   - 114: {fileID: 1584062711}
   m_Layer: 0
   m_Name: Construction Collider
@@ -824,7 +809,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1584062707}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 470, y: 0, z: 0}
+  m_LocalPosition: {x: 445, y: 0, z: 0}
   m_LocalScale: {x: 50, y: 470, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -844,23 +829,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!50 &1584062710
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1584062707}
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &1584062711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +841,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_obstacleManager: {fileID: 1364650088}
+  m_create: 0
+  m_destroy: 0
 --- !u!1 &1658142134
 GameObject:
   m_ObjectHideFlags: 0
