@@ -23,8 +23,10 @@ public class PlayerMovement : MonoBehaviour {
         }
         
         //Debug.Log (rigid.velocity);
-
 	}
     
-    
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        Debug.Log (coll.gameObject.tag);
+    }
 }
