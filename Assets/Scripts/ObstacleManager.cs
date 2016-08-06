@@ -26,10 +26,13 @@ public class ObstacleManager : MonoBehaviour {
 	void Update () {
 		if (m_started && !m_paused) {
 			foreach (GameObject obstacle in m_obstacleObjects) {
-				// Update all game objects positions
-				Vector3 curPos = obstacle.transform.position;
-				curPos.x -= m_speed * Time.deltaTime;
-				obstacle.transform.position = curPos;
+                // Update all game objects positions
+                for (int i = 0; i < 2; i++) {
+                    Rigidbody2D obstacleBody = obstacle.transform.GetChild (i).GetComponent<Rigidbody2D>();
+                    Vector3 curPos = obstacleBody.position;
+                    curPos.x -= m_speed * Time.deltaTime;
+                    obstacleBody.position = curPos;
+                }
 			}
 		}
 		// If trigger event on create collider

@@ -7,6 +7,7 @@ public class TriggerColliders : MonoBehaviour {
 	public bool m_destroy = false;
 
 	void start() {
+    
 	}
 
 	/**

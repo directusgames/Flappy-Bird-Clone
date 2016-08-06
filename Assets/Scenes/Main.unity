@@ -187,7 +187,7 @@ Rigidbody2D:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &453091157
 GameObject:
@@ -286,7 +286,7 @@ Rigidbody2D:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &540682553
 GameObject:
@@ -317,7 +317,7 @@ Transform:
   - {fileID: 926502615}
   - {fileID: 1584062708}
   m_Father: {fileID: 1364650087}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &602816557
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ Transform:
   - {fileID: 1865442341}
   - {fileID: 840786196}
   m_Father: {fileID: 1364650087}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &743462852
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ Rigidbody2D:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &926502614
 GameObject:
@@ -621,7 +621,7 @@ Transform:
   - {fileID: 276100725}
   - {fileID: 453091158}
   m_Father: {fileID: 1364650087}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &1003628739
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +653,7 @@ Transform:
   - {fileID: 2037407304}
   - {fileID: 1658142135}
   m_Father: {fileID: 1364650087}
-  m_RootOrder: 0
+  m_RootOrder: 3
 --- !u!1 &1364650086
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,10 +681,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1003628740}
   - {fileID: 956109703}
   - {fileID: 602816558}
   - {fileID: 540682554}
+  - {fileID: 1003628740}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!114 &1364650088
@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc4a14c7c50ea74d937bba8eb9761ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 50
+  m_speed: 100
   m_obstacleObjects: []
   m_started: 1
   m_paused: 0
@@ -737,7 +737,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 50
+  m_GravityScale: 100
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb18511ee1e60c54888e4c1561f198bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 15000
+  jumpForce: 17000
   maxVelocityMag: 0
   maxVelocity: 0
 --- !u!212 &1427792490
@@ -797,7 +797,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1427792487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -353.8, y: 5.5, z: -1}
+  m_LocalPosition: {x: -183, y: 3, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1067,7 +1067,7 @@ Rigidbody2D:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &1865442340
 GameObject:
@@ -1166,7 +1166,7 @@ Rigidbody2D:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &2037407303
 GameObject:
@@ -1269,5 +1269,5 @@ Rigidbody2D:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
