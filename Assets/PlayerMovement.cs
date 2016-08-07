@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     
-        if(Input.GetKeyDown (KeyCode.Space))
+        if(Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
            rigid.velocity = Vector2.zero;
            rigid.AddForce(new Vector2(0f,1f) *  jumpForce);
