@@ -13,7 +13,7 @@ public class ObstacleManager : MonoBehaviour {
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
 
-	private Vector3 m_spawnOrigin = new Vector3 (825f, 0f, 0f);
+	private Vector3 m_spawnOrigin = new Vector3 (825f, 0f, -5f);
 
 	// Use this for initialization
 	void Start () {
