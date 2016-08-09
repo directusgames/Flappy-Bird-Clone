@@ -7,19 +7,24 @@ public class PlayerMovement : MonoBehaviour {
     public float maxVelocityMag;
     public float maxVelocity;
     Rigidbody2D rigid;
+    bool alive;
     
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody2D>();
+        alive = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-    
-        if(Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown(0))
+        
+        if(alive)
         {
-           rigid.velocity = Vector2.zero;
-           rigid.AddForce(new Vector2(0f,1f) *  jumpForce);
+            if(Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+               rigid.velocity = Vector2.zero;
+               rigid.AddForce(new Vector2(0f,1f) *  jumpForce);
+            }
         }
         
         //Debug.Log (rigid.velocity);
@@ -27,9 +32,9 @@ public class PlayerMovement : MonoBehaviour {
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log (coll.gameObject.tag);
         if(coll.gameObject.transform.parent.gameObject.tag == "Obstacle")
         {
+            alive = false;
             //reset game
         }
     }

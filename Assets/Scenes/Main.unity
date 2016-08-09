@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc4a14c7c50ea74d937bba8eb9761ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 100
+  m_speed: 150
   m_obstacleObjects: []
   m_started: 1
   m_paused: 0
