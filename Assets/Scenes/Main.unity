@@ -559,6 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb18511ee1e60c54888e4c1561f198bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_obstacleParent: {fileID: 1364650086}
   jumpForce: 21000
   maxVelocityMag: 0
   maxVelocity: 0

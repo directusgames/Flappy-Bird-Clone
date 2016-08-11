@@ -22,16 +22,17 @@ public class ObstacleManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_obstacleObjects = new List<GameObject>(
-			GameObject.FindGameObjectsWithTag("Obstacle")
-		);
-
 		GameObject pairOne = this.createObstacle ();
 		GameObject pairTwo = this.createObstacle ();
 		GameObject pairThree = this.createObstacle ();
 		pairOne.transform.position = m_pairOne;
 		pairTwo.transform.position = m_pairTwo;
 		pairThree.transform.position = m_pairThree;
+	}
+
+	public void Reset () {
+		destroyAll ();
+		Start ();
 	}
 	
 	// Update is called once per frame
@@ -49,19 +50,31 @@ public class ObstacleManager : MonoBehaviour {
 		}
 	}
 
-	void Reset () {
+	public void destroyAll () {
 		foreach (GameObject obstacle in m_obstacleObjects) {
-			m_obstacleObjects.Remove (obstacle);
-			destroyObstacle (obstacle);
+			Destroy (obstacle);
 		}
+		m_obstacleObjects.Clear ();
 	}
 
+	/**
+	 * Pair
+	 * 	- Top
+	 * 		- Collider2D
+	 *  - Bottom
+	 * 		- Collider2D
+	 * 
+	 * Given the top or bottom Collider2D, delete the parent GameObject 'pair'.
+	 */
 	public void destroyObstacle(Collider2D obstacle) {
 		GameObject obstacleContainer = obstacle.transform.parent.gameObject;
 		m_obstacleObjects.Remove (obstacleContainer);
 		Destroy (obstacleContainer);
 	}
 
+	/**
+	 * Create a new collider at Vector3 m_spawnOrigin.
+	 */
 	public GameObject createObstacle() {
 		GameObject newObs = (GameObject) Instantiate (
 			m_obstaclePrefab,
