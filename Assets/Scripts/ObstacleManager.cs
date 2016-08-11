@@ -13,6 +13,11 @@ public class ObstacleManager : MonoBehaviour {
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
 
+	// Poor form, but quick.
+	private Vector3 m_pairOne = new Vector3(0f, 0f, -5f);
+	private Vector3 m_pairTwo = new Vector3(300f, 0f, -5f);
+	private Vector3 m_pairThree = new Vector3(600f, 0f, -5f);
+
 	private Vector3 m_spawnOrigin = new Vector3 (825f, 0f, -5f);
 
 	// Use this for initialization
@@ -20,6 +25,13 @@ public class ObstacleManager : MonoBehaviour {
 		m_obstacleObjects = new List<GameObject>(
 			GameObject.FindGameObjectsWithTag("Obstacle")
 		);
+
+		GameObject pairOne = this.createObstacle ();
+		GameObject pairTwo = this.createObstacle ();
+		GameObject pairThree = this.createObstacle ();
+		pairOne.transform.position = m_pairOne;
+		pairTwo.transform.position = m_pairTwo;
+		pairThree.transform.position = m_pairThree;
 	}
 	
 	// Update is called once per frame
@@ -35,12 +47,13 @@ public class ObstacleManager : MonoBehaviour {
                 }
 			}
 		}
-		// If trigger event on create collider
-			// Create new Obstacle prefab
-			// Add it game object array 
-		// If trigger event on destruction obstacle
-			// Detect object causing trigger and delete
-			// Remove from game object list
+	}
+
+	void Reset () {
+		foreach (GameObject obstacle in m_obstacleObjects) {
+			m_obstacleObjects.Remove (obstacle);
+			destroyObstacle (obstacle);
+		}
 	}
 
 	public void destroyObstacle(Collider2D obstacle) {
@@ -49,12 +62,14 @@ public class ObstacleManager : MonoBehaviour {
 		Destroy (obstacleContainer);
 	}
 
-	public void createObstacle() {
+	public GameObject createObstacle() {
 		GameObject newObs = (GameObject) Instantiate (
 			m_obstaclePrefab,
 			m_spawnOrigin,
 			Quaternion.identity
 		);
+		newObs.transform.parent = this.transform;
 		m_obstacleObjects.Add (newObs);
+		return newObs;
 	}
 }
