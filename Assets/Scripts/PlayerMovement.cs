@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour {
 		// Pause obstacle movement
 		m_obstacleManager.m_paused = true;
 		alive = false;
+		Lock ();
 		// Death animation.
 		// Sound effect trigger - if sound enabled.
 		// UI score display?
