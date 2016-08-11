@@ -31,6 +31,10 @@ public class TriggerColliders : MonoBehaviour {
 					m_destroy = true;
 				}
 				break;
+
+			case "leftDeath":
+			case "floorDeath":
+				break;
 		}
 	}
 }

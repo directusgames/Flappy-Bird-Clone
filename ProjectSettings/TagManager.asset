@@ -6,6 +6,9 @@ TagManager:
   tags:
   - createCollide
   - destroyCollide
+  - Obstacle
+  - leftDeath
+  - floorDeath
   layers:
   - Default
   - TransparentFX
