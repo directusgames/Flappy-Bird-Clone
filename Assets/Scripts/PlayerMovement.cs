@@ -9,16 +9,24 @@ public class PlayerMovement : MonoBehaviour {
     public float maxVelocityMag;
     public float maxVelocity;
     Rigidbody2D rigid;
-    bool alive;
-    
-	// Use this for initialization
+    public bool alive = false;
+	public float m_gravityScale = 100f;
+
 	void Start () {
-        rigid = GetComponent<Rigidbody2D>();
-        alive = true;
+		alive = false; // Don't start until user has elected to start.
+		rigid = GetComponent<Rigidbody2D>();
+		Lock ();
 		m_obstacleManager = m_obstacleParent.GetComponent<ObstacleManager> ();
 	}
+
+	public void Lock() {
+		rigid.gravityScale = 0;
+	}
+
+	public void Unlock() {
+		rigid.gravityScale = m_gravityScale;
+	}
 	
-	// Update is called once per frame
 	void Update () {
         
         if (alive)

@@ -5,11 +5,10 @@ using System.Collections.Generic;
 public class ObstacleManager : MonoBehaviour {
 	public float m_speed;
 	public List<GameObject> m_obstacleObjects;
-	public bool m_started = true;
-	public bool m_paused = false;
+	public bool m_started;
+	public bool m_paused;
 
 	public GameObject m_obstaclePrefab;
-
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
 
@@ -22,6 +21,8 @@ public class ObstacleManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		m_paused = true;
+		m_started = false;
 		GameObject pairOne = this.createObstacle ();
 		GameObject pairTwo = this.createObstacle ();
 		GameObject pairThree = this.createObstacle ();
@@ -39,13 +40,13 @@ public class ObstacleManager : MonoBehaviour {
 	void Update () {
 		if (m_started && !m_paused) {
 			foreach (GameObject obstacle in m_obstacleObjects) {
-                // Update all game objects positions
-                for (int i = 0; i < 2; i++) {
-                    Rigidbody2D obstacleBody = obstacle.transform.GetChild (i).GetComponent<Rigidbody2D>();
-                    Vector3 curPos = obstacleBody.position;
-                    curPos.x -= m_speed * Time.deltaTime;
-                    obstacleBody.position = curPos;
-                }
+				// Update all game objects positions
+				for (int i = 0; i < 2; i++) {
+					Rigidbody2D obstacleBody = obstacle.transform.GetChild (i).GetComponent<Rigidbody2D> ();
+					Vector3 curPos = obstacleBody.position;
+					curPos.x -= m_speed * Time.deltaTime;
+					obstacleBody.position = curPos;
+				}
 			}
 		}
 	}
