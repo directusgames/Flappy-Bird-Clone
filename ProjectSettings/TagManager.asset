@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - leftDeath
   - floorDeath
+  - canvas
   layers:
   - Default
   - TransparentFX

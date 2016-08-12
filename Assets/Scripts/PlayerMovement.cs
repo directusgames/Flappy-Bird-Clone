@@ -2,21 +2,26 @@
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-    
-	public GameObject m_obstacleParent;
-	private ObstacleManager m_obstacleManager;
+	public ObstacleManager m_obstacleManager;
+
+	public GameObject m_canvas;
+
     public float jumpForce;
     public float maxVelocityMag;
     public float maxVelocity;
-    Rigidbody2D rigid;
-    public bool alive = false;
+
+	public Vector3 m_spawnPos = new Vector3(-183f, 3f, -1f);
+    
+	private Rigidbody2D rigid;
+    
+	public bool alive = false;
 	public float m_gravityScale = 100f;
 
-	void Start () {
+	public void Start () {
+		this.transform.position = m_spawnPos;
 		alive = false; // Don't start until user has elected to start.
 		rigid = GetComponent<Rigidbody2D>();
 		Freeze ();
-		m_obstacleManager = m_obstacleParent.GetComponent<ObstacleManager> ();
 	}
 
 	public void Freeze() {
@@ -55,6 +60,7 @@ public class PlayerMovement : MonoBehaviour {
         {
 			// Player has hit a randomly generated obstacle.
 			Death();
+			m_canvas.SetActive (true);
         }
     }
 }

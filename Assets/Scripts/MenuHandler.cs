@@ -14,6 +14,8 @@ public class MenuHandler : MonoBehaviour {
 	public void startGame() {
 		Debug.Log ("Called");
 		m_canvas.SetActive (false);
+		m_playerMovement.Start ();
+		m_obstacleManager.Reset();
 		m_playerMovement.alive = true;
 		m_playerMovement.Unfreeze ();
 		m_playerMovement.enabled = true;

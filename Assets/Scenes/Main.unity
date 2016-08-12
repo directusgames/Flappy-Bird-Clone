@@ -1027,10 +1027,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb18511ee1e60c54888e4c1561f198bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obstacleParent: {fileID: 1364650086}
+  m_obstacleManager: {fileID: 1364650088}
+  m_canvas: {fileID: 1458942632}
   jumpForce: 21000
   maxVelocityMag: 0
   maxVelocity: 0
+  m_spawnPos: {x: -183, y: 3, z: -1}
   alive: 0
   m_gravityScale: 100
 --- !u!212 &1427792490
@@ -1121,7 +1123,7 @@ GameObject:
   - 114: {fileID: 1458942639}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

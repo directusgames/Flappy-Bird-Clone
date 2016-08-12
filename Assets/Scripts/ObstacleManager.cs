@@ -20,7 +20,7 @@ public class ObstacleManager : MonoBehaviour {
 	private Vector3 m_spawnOrigin = new Vector3 (825f, 0f, -5f);
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		m_paused = true;
 		m_started = false;
 		GameObject pairOne = this.createObstacle ();
