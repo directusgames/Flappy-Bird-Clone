@@ -15,7 +15,8 @@ public class MenuHandler : MonoBehaviour {
 		Debug.Log ("Called");
 		m_canvas.SetActive (false);
 		m_playerMovement.alive = true;
-		m_playerMovement.Unlock ();
+		m_playerMovement.Unfreeze ();
+		m_playerMovement.enabled = true;
 		m_obstacleManager.m_started = true;
 		m_obstacleManager.m_paused = false;
 		// SceneManager.LoadScene(1);

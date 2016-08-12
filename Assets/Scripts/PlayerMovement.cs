@@ -15,20 +15,19 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
 		alive = false; // Don't start until user has elected to start.
 		rigid = GetComponent<Rigidbody2D>();
-		Lock ();
+		Freeze ();
 		m_obstacleManager = m_obstacleParent.GetComponent<ObstacleManager> ();
 	}
 
-	public void Lock() {
+	public void Freeze() {
 		rigid.gravityScale = 0;
 	}
 
-	public void Unlock() {
+	public void Unfreeze() {
 		rigid.gravityScale = m_gravityScale;
 	}
 	
 	void Update () {
-        
         if (alive)
         {
             if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -37,7 +36,6 @@ public class PlayerMovement : MonoBehaviour {
                rigid.AddForce(new Vector2(0f, 1f) *  jumpForce);
             }
         }
-        
         //Debug.Log (rigid.velocity);
 	}
 
@@ -45,7 +43,6 @@ public class PlayerMovement : MonoBehaviour {
 		// Pause obstacle movement
 		m_obstacleManager.m_paused = true;
 		alive = false;
-		Lock ();
 		// Death animation.
 		// Sound effect trigger - if sound enabled.
 		// UI score display?
