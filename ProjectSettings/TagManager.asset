@@ -10,6 +10,7 @@ TagManager:
   - leftDeath
   - floorDeath
   - canvas
+  - PointsCollider
   layers:
   - Default
   - TransparentFX

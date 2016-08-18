@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-	public ObstacleManager m_obstacleManager;
-
+	
+    public ObstacleManager m_obstacleManager;
+    
 	public GameObject m_canvas;
+    
+    public Text txtScore;
+    
+    public int score;
 
     public float jumpForce;
-    public float maxVelocityMag;
-    public float maxVelocity;
 
 	public Vector3 m_spawnPos = new Vector3(-183f, 3f, -1f);
     
@@ -18,10 +22,13 @@ public class PlayerMovement : MonoBehaviour {
 	public float m_gravityScale = 100f;
 
 	public void Start () {
+        score = 0;
+        txtScore.text = "" + score;
 		this.transform.position = m_spawnPos;
 		alive = false; // Don't start until user has elected to start.
 		rigid = GetComponent<Rigidbody2D>();
 		Freeze ();
+        rigid.velocity = Vector2.zero; //set velocity to 0 otherwise results in unexpected behaviour unpon reset.
 	}
 
 	public void Freeze() {
@@ -48,6 +55,7 @@ public class PlayerMovement : MonoBehaviour {
 		// Pause obstacle movement
 		m_obstacleManager.m_paused = true;
 		alive = false;
+        txtScore.enabled = false;
 		// Death animation.
 		// Sound effect trigger - if sound enabled.
 		// UI score display?
@@ -63,4 +71,15 @@ public class PlayerMovement : MonoBehaviour {
 			m_canvas.SetActive (true);
         }
     }
+    
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "PointsCollider")
+        {
+            score++;
+            txtScore.text = "" + score;
+        }
+    }
+    
+    
 }
