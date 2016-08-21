@@ -5,9 +5,6 @@ using System.Collections.Generic;
 public class ObstacleManager : MonoBehaviour {
 	public float m_speed;
 	public List<GameObject> m_obstacleObjects;
-	public bool m_started;
-	public bool m_paused;
-
 	public GameObject m_obstaclePrefab;
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
@@ -21,24 +18,26 @@ public class ObstacleManager : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-		m_paused = true;
-		m_started = false;
+        Debug.Log ("Creating obstacles, adjusting positions");
 		GameObject pairOne = this.createObstacle ();
 		GameObject pairTwo = this.createObstacle ();
 		GameObject pairThree = this.createObstacle ();
 		pairOne.transform.position = m_pairOne;
 		pairTwo.transform.position = m_pairTwo;
 		pairThree.transform.position = m_pairThree;
-	}
+        PauseObstacles();
+        StopObstacles();
+    }
 
 	public void Reset () {
+        Debug.Log ("Reset. Destroying all obstacles, starting obstacle management again");
 		destroyAll ();
 		Start ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (m_started && !m_paused) {
+		//if (m_started && !m_paused) {
 //			foreach (GameObject obstacle in m_obstacleObjects) {
 //				// Update all game objects positions
 //				for (int i = 0; i < 3; i++) {
@@ -48,10 +47,11 @@ public class ObstacleManager : MonoBehaviour {
 //					obstacleBody.position = curPos;
 //				}
 //			}
-		}
+		//}
 	}
 
 	public void destroyAll () {
+        Debug.Log ("removing objects from list");
 		foreach (GameObject obstacle in m_obstacleObjects) {
 			Destroy (obstacle);
 		}
@@ -68,15 +68,18 @@ public class ObstacleManager : MonoBehaviour {
 	 * Given the top or bottom Collider2D, delete the parent GameObject 'pair'.
 	 */
 	public void destroyObstacle(Collider2D obstacle) {
-		GameObject obstacleContainer = obstacle.transform.parent.gameObject;
-		m_obstacleObjects.Remove (obstacleContainer);
-		Destroy (obstacleContainer);
+		if(obstacle.transform.parent.gameObject != null)
+        {
+            m_obstacleObjects.Remove (obstacle.transform.parent.gameObject);
+    		Destroy (obstacle.transform.parent.gameObject);
+        }
 	}
 
 	/**
 	 * Create a new collider at Vector3 m_spawnOrigin.
 	 */
 	public GameObject createObstacle() {
+        Debug.Log ("Creating obstacle");
 		GameObject newObs = (GameObject) Instantiate (
 			m_obstaclePrefab,
 			m_spawnOrigin,
@@ -86,4 +89,45 @@ public class ObstacleManager : MonoBehaviour {
 		m_obstacleObjects.Add (newObs);
 		return newObs;
 	}
+    
+    //Pause mvoement of all current obstacles in scene
+    public void PauseObstacles()
+    {
+        Debug.Log ("Pausing obstacles");
+        foreach (GameObject obs in m_obstacleObjects)
+        {
+            ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
+            om.paused = true;
+        }
+    }
+    
+    public void UnpauseObstacles()
+    {   
+        Debug.Log ("Unpausing obstacles");
+        foreach (GameObject obs in m_obstacleObjects)
+        {
+            ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
+            om.paused = false;
+        }
+    }
+    
+    public void StartObstacles()
+    {
+        Debug.Log ("Starting obstacles");
+        foreach (GameObject obs in m_obstacleObjects)
+        {
+            ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
+            om.started = true;
+        }
+    }
+    
+    public void StopObstacles()
+    {
+        Debug.Log ("Stopping obstacles");
+        foreach (GameObject obs in m_obstacleObjects)
+        {
+            ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
+            om.started = false;
+        }
+    }   
 }

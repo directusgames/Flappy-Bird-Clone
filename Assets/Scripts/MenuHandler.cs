@@ -8,20 +8,31 @@ public class MenuHandler : MonoBehaviour {
 	public ObstacleManager m_obstacleManager;
 	public GameObject m_canvas;
     public Text txtScore;
+    
+    bool firstRun;
 
 	// Use this for initialization
 	void Start () {
+    
+        firstRun = true;
 	}
 
 	public void startGame() {
 		m_canvas.SetActive (false);
 		m_playerMovement.Start ();
-		m_obstacleManager.Reset();
+		if(!firstRun)
+        {
+            m_obstacleManager.Reset();
+        }
+        else
+        {
+            firstRun = false;
+        }
 		m_playerMovement.alive = true;
 		m_playerMovement.Unfreeze ();
 		m_playerMovement.enabled = true;
-		m_obstacleManager.m_started = true;
-		m_obstacleManager.m_paused = false;
+		m_obstacleManager.StartObstacles();
+		m_obstacleManager.UnpauseObstacles();
         txtScore.enabled = true;
 		// SceneManager.LoadScene(1);
 	}

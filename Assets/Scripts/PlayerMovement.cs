@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Death() {
 		// Pause obstacle movement
-		m_obstacleManager.m_paused = true;
+		m_obstacleManager.PauseObstacles();
 		alive = false;
         txtScore.enabled = false;
 		// Death animation.
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour {
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.transform.parent.gameObject.tag == "Obstacle")
+        if (coll.gameObject.tag == "Obstacle")
         {
 			// Player has hit a randomly generated obstacle.
 			Death();

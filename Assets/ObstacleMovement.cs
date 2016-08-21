@@ -8,7 +8,8 @@ public class ObstacleMovement : MonoBehaviour {
     public bool started, paused;
     
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+        Debug.Log ("Obstacle created");
 	    started = true;
         paused = false;
 	}
