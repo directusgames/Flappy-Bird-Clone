@@ -777,7 +777,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 926502615}
   - 61: {fileID: 926502616}
-  - 114: {fileID: 926502618}
+  - 114: {fileID: 926502617}
   m_Layer: 0
   m_Name: Destroy Trigger
   m_TagString: destroyCollide
@@ -812,7 +812,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &926502618
+--- !u!114 &926502617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -820,12 +820,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 926502614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd741b84d3f58141be0d55dd5701b47, type: 3}
+  m_Script: {fileID: 11500000, guid: 0afdb5905daf0a54297f1bac62d9a733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obstacleManager: {fileID: 1364650088}
-  m_create: 0
-  m_destroy: 0
+  obstacleManager: {fileID: 1364650088}
 --- !u!1 &1170003055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1068,7 @@ MonoBehaviour:
     type: 2}
   m_createCollider: {fileID: 1584062709}
   m_destroyCollider: {fileID: 926502616}
+  m_spawnOrigin: {x: 650, y: 0, z: -5}
 --- !u!1 &1427792487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1177,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1427792487}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1343,6 +1342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerMovement: {fileID: 1427792489}
   m_obstacleManager: {fileID: 1364650088}
+  colliderGenerator: {fileID: 1584062710}
   m_canvas: {fileID: 1458942632}
   txtScore: {fileID: 1957019602}
 --- !u!1 &1502520831
@@ -1433,7 +1433,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1584062708}
   - 61: {fileID: 1584062709}
-  - 114: {fileID: 1584062711}
+  - 114: {fileID: 1584062710}
   m_Layer: 0
   m_Name: Create Trigger
   m_TagString: createCollide
@@ -1468,7 +1468,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &1584062711
+--- !u!114 &1584062710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1476,12 +1476,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1584062707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd741b84d3f58141be0d55dd5701b47, type: 3}
+  m_Script: {fileID: 11500000, guid: 672b1ee67eb44c5408e6e06d2d6a8b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obstacleManager: {fileID: 1364650088}
-  m_create: 0
-  m_destroy: 0
+  obstacleManager: {fileID: 1364650088}
+  create: 0
 --- !u!1 &1665261678
 GameObject:
   m_ObjectHideFlags: 0

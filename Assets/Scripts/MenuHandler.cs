@@ -6,6 +6,7 @@ using System.Collections;
 public class MenuHandler : MonoBehaviour {
 	public PlayerMovement m_playerMovement;
 	public ObstacleManager m_obstacleManager;
+    public ColliderGenerator colliderGenerator;
 	public GameObject m_canvas;
     public Text txtScore;
     
@@ -31,6 +32,7 @@ public class MenuHandler : MonoBehaviour {
 		m_playerMovement.alive = true;
 		m_playerMovement.Unfreeze ();
 		m_playerMovement.enabled = true;
+        colliderGenerator.create = true;
 		m_obstacleManager.StartObstacles();
 		m_obstacleManager.UnpauseObstacles();
         txtScore.enabled = true;

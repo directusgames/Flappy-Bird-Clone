@@ -11,6 +11,7 @@ TagManager:
   - floorDeath
   - canvas
   - PointsCollider
+  - ObstaclePair
   layers:
   - Default
   - TransparentFX
