@@ -23,16 +23,17 @@ public class MenuHandler : MonoBehaviour {
 		m_playerMovement.Start ();
 		if(!firstRun)
         {
+            colliderGenerator.create = false;
             m_obstacleManager.Reset();
         }
         else
         {
             firstRun = false;
+            colliderGenerator.create = true;
         }
 		m_playerMovement.alive = true;
 		m_playerMovement.Unfreeze ();
 		m_playerMovement.enabled = true;
-        colliderGenerator.create = true;
 		m_obstacleManager.StartObstacles();
 		m_obstacleManager.UnpauseObstacles();
         txtScore.enabled = true;

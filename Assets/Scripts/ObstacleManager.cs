@@ -15,6 +15,8 @@ public class ObstacleManager : MonoBehaviour {
 	private Vector3 m_pairOne = new Vector3(0f, 0f, -5f);
 	private Vector3 m_pairTwo = new Vector3(300f, 0f, -5f);
 	private Vector3 m_pairThree = new Vector3(600f, 0f, -5f);
+    
+    private int obstNum = 0;
 
 	// Use this for initialization
 	public void Start () {
@@ -84,6 +86,8 @@ public class ObstacleManager : MonoBehaviour {
 			Quaternion.identity
 		);
 		newObs.transform.parent = this.transform;
+        newObs.name = "Pair " + obstNum;
+        obstNum++;
 		m_obstacleObjects.Add (newObs);
 		return newObs;
 	}

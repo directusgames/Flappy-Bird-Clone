@@ -5,6 +5,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 	
     public ObstacleManager m_obstacleManager;
+    public ColliderGenerator collGen;
     
 	public GameObject m_canvas;
     
@@ -53,6 +54,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Death() {
 		// Pause obstacle movement
+        collGen.create = false;
 		m_obstacleManager.PauseObstacles();
 		alive = false;
         txtScore.enabled = false;
