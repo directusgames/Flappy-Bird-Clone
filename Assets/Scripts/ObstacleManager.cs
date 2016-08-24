@@ -131,5 +131,10 @@ public class ObstacleManager : MonoBehaviour {
             ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
             om.started = false;
         }
-    }   
+    }
+    
+    public void MassiveDestruction()
+    {
+        
+    }
 }

@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Death() {
 		// Pause obstacle movement
         collGen.create = false;
+        m_obstacleManager.MassiveDestruction();
 		m_obstacleManager.PauseObstacles();
 		alive = false;
         txtScore.enabled = false;
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 		// Sound effect trigger - if sound enabled.
 		// UI score display?
 		// Other stuff?
+        
 	}
     
     void OnCollisionEnter2D(Collision2D coll)
