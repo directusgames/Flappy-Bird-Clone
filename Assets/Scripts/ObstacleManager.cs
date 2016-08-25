@@ -12,9 +12,9 @@ public class ObstacleManager : MonoBehaviour {
     public Vector3 m_spawnOrigin;
 
 	// Poor form, but quick.
-	private Vector3 m_pairOne = new Vector3(0f, 0f, -5f);
-	private Vector3 m_pairTwo = new Vector3(300f, 0f, -5f);
-	private Vector3 m_pairThree = new Vector3(600f, 0f, -5f);
+	private Vector3 m_pairOne = new Vector3(0f, 0f, 1f);
+	private Vector3 m_pairTwo = new Vector3(300f, 0f, 1f);
+	private Vector3 m_pairThree = new Vector3(600f, 0f, 1f);
     
     private int obstNum = 0;
 
@@ -133,6 +133,7 @@ public class ObstacleManager : MonoBehaviour {
         }
     }
     
+    //blow shit up
     public void MassiveDestruction()
     {
         

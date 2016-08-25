@@ -23,12 +23,15 @@ public class PlayerMovement : MonoBehaviour {
 	public float m_gravityScale = 100f;
 
 	public void Start () {
-        score = 0;
+        score = 0;        
         txtScore.text = "" + score;
+        
 		this.transform.position = m_spawnPos;
+        
 		alive = false; // Don't start until user has elected to start.
-		rigid = GetComponent<Rigidbody2D>();
-		Freeze ();
+        Freeze ();
+        
+        rigid = GetComponent<Rigidbody2D>();
         rigid.velocity = Vector2.zero; //set velocity to 0 otherwise results in unexpected behaviour unpon reset.
 	}
 
