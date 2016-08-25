@@ -132,10 +132,4 @@ public class ObstacleManager : MonoBehaviour {
             om.started = false;
         }
     }
-    
-    //blow shit up
-    public void MassiveDestruction()
-    {
-        
-    }
 }

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     public ObstacleManager m_obstacleManager;
     public ColliderGenerator collGen;
     
-	public GameObject m_canvas;
+	public GameObject m_canvas, deathExplosion;
     
     public Text txtScore;
     
@@ -57,17 +57,47 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Death() {
 		// Pause obstacle movement
-        collGen.create = false;
-        m_obstacleManager.MassiveDestruction();
-		m_obstacleManager.PauseObstacles();
-		alive = false;
-        txtScore.enabled = false;
-		// Death animation.
-		// Sound effect trigger - if sound enabled.
-		// UI score display?
-		// Other stuff?
-        
-	}
+        if(alive)
+        {
+            alive = false;
+            GameObject deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
+            Time.timeScale = 0.25f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            
+            Rigidbody2D[] rigids = null;
+            
+            foreach(GameObject obstaclePair in m_obstacleManager.m_obstacleObjects)
+            {
+                rigids = obstaclePair.GetComponentsInChildren<Rigidbody2D>();
+                foreach(Rigidbody2D rig in rigids)
+                {
+                    rig.transform.parent = null;
+                    rig.isKinematic = false;                
+                    AddExplosionForce(rig, 1000f, new Vector3(-250, 0, -1), 5000f);
+                    rig.angularVelocity = Random.Range(150f, 300f);
+                    
+                }
+            }
+            
+            GetComponent<SpriteRenderer>().enabled = false;
+           
+            
+           
+            collGen.create = false;
+    		m_obstacleManager.PauseObstacles();
+            txtScore.enabled = false;
+            
+            Invoke ("ActivateCanvas", 1.5f);
+            
+         
+            // Death animation.
+    		// Sound effect trigger - if sound enabled.
+    		// UI score display?
+    		// Other stuff?
+            
+            
+    	}
+    }
     
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -75,7 +105,6 @@ public class PlayerMovement : MonoBehaviour {
         {
 			// Player has hit a randomly generated obstacle.
 			Death();
-			m_canvas.SetActive (true);
         }
     }
     
@@ -88,5 +117,20 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
     
+    public static void AddExplosionForce (Rigidbody2D body, float expForce, Vector3 expPosition, float expRadius)
+    {
+        var dir = (body.transform.position - expPosition);
+        float calc = 1 - (dir.magnitude / expRadius);
+        if (calc <= 0) {
+            calc = 0;       
+        }
+        
+        body.AddForce (dir.normalized * expForce * calc);
+    }
+    
+    public void ActivateCanvas()
+    {
+        m_canvas.SetActive (true);
+    }
     
 }
