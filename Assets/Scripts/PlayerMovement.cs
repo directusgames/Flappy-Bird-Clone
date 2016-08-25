@@ -29,9 +29,9 @@ public class PlayerMovement : MonoBehaviour {
 		this.transform.position = m_spawnPos;
         
 		alive = false; // Don't start until user has elected to start.
-        Freeze ();
-        
+   
         rigid = GetComponent<Rigidbody2D>();
+        Freeze ();
         rigid.velocity = Vector2.zero; //set velocity to 0 otherwise results in unexpected behaviour unpon reset.
 	}
 
