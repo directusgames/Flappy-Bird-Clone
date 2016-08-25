@@ -60,12 +60,16 @@ public class PlayerMovement : MonoBehaviour {
         if(alive)
         {
             alive = false;
+            //Create death explosion effect
             GameObject deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
-            Time.timeScale = 0.25f;
+            
+            //Slow time and lower delta time step so we don't get low fps.
+            Time.timeScale = 0.1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
             Rigidbody2D[] rigids = null;
             
+            //Iterate through all obstacle pairs in the list, get their rigid bodies and apply an explosion force to them            
             foreach(GameObject obstaclePair in m_obstacleManager.m_obstacleObjects)
             {
                 rigids = obstaclePair.GetComponentsInChildren<Rigidbody2D>();
@@ -73,19 +77,32 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     rig.transform.parent = null;
                     rig.isKinematic = false;                
-                    AddExplosionForce(rig, 1000f, new Vector3(-250, 0, -1), 5000f);
+                    //AddExplosionForce(rig, 1000f, transform.position, 5000f);
+                    if(rig.gameObject.name == "Top")
+                    {
+                        rig.velocity = new Vector2(1,1) * 500f;
+                        Debug.Log ("Top " + rig.velocity);
+                        
+                    }
+                    else if(rig.gameObject.name == "Bottom")
+                    {
+                        rig.velocity = new Vector2(1,1) * 500f;
+                        Debug.Log ("Bot " + rig.velocity);
+                    }
+                    Debug.Log (rigid.name + ": " + rigid.velocity);
                     rig.angularVelocity = Random.Range(150f, 300f);
-                    
                 }
             }
             
+            //turn off player sprite for now
             GetComponent<SpriteRenderer>().enabled = false;
            
-            
-           
+            //Turn off creation collider as flying obstacles could drigger it           
             collGen.create = false;
+            collGen.GetComponent<BoxCollider2D>().enabled = false;
+            
+            //pause horizontal obstacle movement
     		m_obstacleManager.PauseObstacles();
-            txtScore.enabled = false;
             
             Invoke ("ActivateCanvas", 1.5f);
             
@@ -131,6 +148,7 @@ public class PlayerMovement : MonoBehaviour {
     public void ActivateCanvas()
     {
         m_canvas.SetActive (true);
+        txtScore.enabled = false;
     }
     
 }
