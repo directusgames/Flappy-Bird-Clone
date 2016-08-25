@@ -19,6 +19,9 @@ public class MenuHandler : MonoBehaviour {
 	}
 
 	public void startGame() {
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 0.02f;
+        
 		m_canvas.SetActive (false);
 		m_playerMovement.Start ();
 		if(!firstRun)

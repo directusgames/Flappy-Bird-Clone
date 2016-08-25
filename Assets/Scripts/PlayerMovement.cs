@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 	
     public ObstacleManager m_obstacleManager;
     public ColliderGenerator collGen;
+    public GameObject collDes;
     
 	public GameObject m_canvas, deathExplosion;
     
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
                 rigids = obstaclePair.GetComponentsInChildren<Rigidbody2D>();
                 foreach(Rigidbody2D rig in rigids)
                 {
-                    rig.transform.parent = null;
+                    //rig.transform.parent = null;
                     rig.isKinematic = false;                
                     //AddExplosionForce(rig, 1000f, transform.position, 5000f);
                     if(rig.gameObject.name == "Top")
@@ -95,11 +96,13 @@ public class PlayerMovement : MonoBehaviour {
             }
             
             //turn off player sprite for now
-            GetComponent<SpriteRenderer>().enabled = false;
+            //GetComponent<SpriteRenderer>().enabled = false;
            
             //Turn off creation collider as flying obstacles could drigger it           
             collGen.create = false;
             collGen.GetComponent<BoxCollider2D>().enabled = false;
+            collDes.GetComponent<BoxCollider2D>().enabled = false;
+
             
             //pause horizontal obstacle movement
     		m_obstacleManager.PauseObstacles();

@@ -52,7 +52,8 @@ public class ObstacleManager : MonoBehaviour {
 
 	public void destroyAll () {
         
-		foreach (GameObject obstacle in m_obstacleObjects) {
+		foreach (GameObject obstacle in m_obstacleObjects) 
+        {
 			Destroy (obstacle);
 		}
 		m_obstacleObjects.Clear ();
