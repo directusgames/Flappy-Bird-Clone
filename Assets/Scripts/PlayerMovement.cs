@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 	
     public ObstacleManager m_obstacleManager;
     public ColliderGenerator collGen;
-    public GameObject collDes;
+    public ColliderDestroyer collDes;
     
 	public GameObject m_canvas, deathExplosion;
     
