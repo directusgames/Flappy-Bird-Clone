@@ -39,6 +39,14 @@ public class PlayerMovement : MonoBehaviour {
 		rigid = GetComponent<Rigidbody2D>();
 		MenuHandler.StartRound += StartRound;
 		Reset ();
+
+		if (copterMode) {
+			m_gravityScale = 100f;
+			m_explodeDuration = 0.25f;
+		} else {
+			m_gravityScale = 700f;
+			m_explodeDuration = 0.25f;
+		}
 	}
 
 	/**
