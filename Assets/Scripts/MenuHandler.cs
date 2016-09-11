@@ -8,7 +8,7 @@ public class MenuHandler : MonoBehaviour {
 	public ObstacleManager m_obstacleManager;
     public ColliderGenerator colliderGenerator;
     public ColliderDestroyer colliderDestroyer;
-	public GameObject m_canvas;
+	public GameObject buttons;
     public Text txtScore;
     
     bool firstRun;
@@ -23,7 +23,7 @@ public class MenuHandler : MonoBehaviour {
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;
         
-		m_canvas.SetActive (false);
+		buttons.SetActive (false);
 		m_playerMovement.Start ();
         
         colliderGenerator.GetComponent<BoxCollider2D>().enabled = true;
@@ -54,4 +54,9 @@ public class MenuHandler : MonoBehaviour {
 	void Update () {
 	
 	}
+    
+    public void CloseApplication()
+    {
+        Application.Quit ();
+    }
 }

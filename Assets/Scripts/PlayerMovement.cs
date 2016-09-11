@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public ColliderGenerator collGen;
     public ColliderDestroyer collDes;
     
-	public GameObject m_canvas, deathExplosion;
+	public GameObject buttons, deathExplosion;
     
     public Text txtScore;
     
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour {
             //pause horizontal obstacle movement
     		m_obstacleManager.PauseObstacles();
             
-            Invoke ("ActivateCanvas", 1.5f);
+            Invoke ("ActivateCanvas", 0.75f);
             
          
             // Death animation.
@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour {
     
     public void ActivateCanvas()
     {
-        m_canvas.SetActive (true);
+        buttons.SetActive (true);
         txtScore.enabled = false;
     }
     
