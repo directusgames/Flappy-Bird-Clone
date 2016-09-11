@@ -59,9 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Death() {
-		// Pause obstacle movement
-        if(alive)
-        {
+		
             alive = false;
             //Create death explosion effect
             // GameObject deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
@@ -113,7 +111,7 @@ public class PlayerMovement : MonoBehaviour {
 			// Sound effect trigger - if sound enabled.
 			// UI score display?
 			// Other stuff?    
-    	}
+    	
     }
 
 	/**
