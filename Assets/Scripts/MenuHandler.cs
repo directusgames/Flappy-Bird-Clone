@@ -18,7 +18,7 @@ public class MenuHandler : MonoBehaviour {
     
         firstRun = true;
 	}
-
+		
 	public void startGame() {
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;
@@ -52,6 +52,8 @@ public class MenuHandler : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-	
+		if (!m_playerMovement.alive) {
+			Debug.Log ("playerded");
+		}
 	}
 }

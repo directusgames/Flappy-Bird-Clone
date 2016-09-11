@@ -9,7 +9,10 @@ public class PlayerMovement : MonoBehaviour {
     public ColliderDestroyer collDes;
     
 	public GameObject m_canvas, deathExplosion;
-    
+
+	public delegate void DeathAction();
+	public static event DeathAction OnDeath;
+
     public Text txtScore;
     
     public int score;
@@ -28,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
         txtScore.text = "" + score;
         
 		this.transform.position = m_spawnPos;
-        
+
 		alive = false; // Don't start until user has elected to start.
    
         rigid = GetComponent<Rigidbody2D>();
@@ -62,8 +65,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             alive = false;
             //Create death explosion effect
-            GameObject deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
-            
+            // GameObject deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
+			Instantiate(deathExplosion, transform.position, Quaternion.identity);
             //Slow time and lower delta time step so we don't get low fps.
             Time.timeScale = 0.1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
@@ -82,15 +85,15 @@ public class PlayerMovement : MonoBehaviour {
                     if(rig.gameObject.name == "Top")
                     {
                         rig.velocity = new Vector2(1,1) * 500f;
-                        Debug.Log ("Top " + rig.velocity);
+                        // Debug.Log ("Top " + rig.velocity);
                         
                     }
                     else if(rig.gameObject.name == "Bottom")
                     {
                         rig.velocity = new Vector2(1,1) * 500f;
-                        Debug.Log ("Bot " + rig.velocity);
+                        // Debug.Log ("Bot " + rig.velocity);
                     }
-                    Debug.Log (rigid.name + ": " + rigid.velocity);
+                    // Debug.Log (rigid.name + ": " + rigid.velocity);
                     rig.angularVelocity = Random.Range(150f, 300f);
                 }
             }
@@ -102,20 +105,28 @@ public class PlayerMovement : MonoBehaviour {
             collGen.create = false;
             collGen.GetComponent<BoxCollider2D>().enabled = false;
             collDes.GetComponent<BoxCollider2D>().enabled = false;
-
             
             //pause horizontal obstacle movement
     		m_obstacleManager.PauseObstacles();
-            
-            Invoke ("ActivateCanvas", 1.5f);
-            
+
+			/**
+			 * Called by the player on player's death.
+			 * Calls a group of methods that match the delegate 'void DeathAction()' method.
+			 * This allows the menu system to define a method that is only called upon PlayerDeath.
+			 * 
+			 * PlayerMovement (-> Refactor? PlayerController, PlayerAI, Player).
+			 *   -> i.e. does more than just movement.
+			 */
+			if (OnDeath == null) {
+				Debug.Log ("Error, no subscribed events to Player Death.");
+			} else {
+				Invoke("OnDeath", 1.5f);
+			}
          
             // Death animation.
     		// Sound effect trigger - if sound enabled.
     		// UI score display?
-    		// Other stuff?
-            
-            
+    		// Other stuff?        
     	}
     }
     
@@ -147,8 +158,8 @@ public class PlayerMovement : MonoBehaviour {
         
         body.AddForce (dir.normalized * expForce * calc);
     }
-    
-    public void ActivateCanvas()
+
+    public void ShowMainMenu()
     {
         m_canvas.SetActive (true);
         txtScore.enabled = false;

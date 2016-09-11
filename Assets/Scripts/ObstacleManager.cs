@@ -69,7 +69,12 @@ public class ObstacleManager : MonoBehaviour {
 	 * Given the top or bottom Collider2D, delete the parent GameObject 'pair'.
 	 */
 	public void destroyObstacle(GameObject obstacle) {
-		if(obstacle != null)
+		if (obstacle == null) {
+			Debug.Log ("Null game object in destroyObstacle() in ObstacleManager.");
+			string str = UnityEngine.StackTraceUtility.ExtractStackTrace ();
+			Debug.Log (str);
+		}
+		if(obstacle != null) // When is this NULL?
         {
             m_obstacleObjects.Remove (obstacle);
     		Destroy (obstacle);
