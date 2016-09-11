@@ -3,40 +3,39 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-	
-    public ObstacleManager m_obstacleManager;
-    public ColliderGenerator collGen;
-    public ColliderDestroyer collDes;
-    
+	// Player properties.
+	public Vector3 m_spawnPos = new Vector3(-183f, 3f, -1f);
+	public bool alive = false; // Don't start until user has elected to start.
+	public int score = 0;
+	public float jumpForce;
+	public float m_gravityScale = 100f;
+	private Rigidbody2D rigid;
+
+	// Define global event callback for player death.
+	public delegate void PostDeath();
+	public static event PostDeath PostPlayerDeath;
+
+		// Obstacle manager.
+	public ObstacleManager m_obstacleManager;
+	public ColliderGenerator collGen;
+	public ColliderDestroyer collDes;
+
+	// Menu / Canvas / Animation.
+	public Text txtScore;
 	public GameObject m_canvas, deathExplosion;
 
-	public delegate void DeathAction();
-	public static event DeathAction OnDeath;
-
-    public Text txtScore;
-    
-    public int score;
-
-    public float jumpForce;
-
-	public Vector3 m_spawnPos = new Vector3(-183f, 3f, -1f);
-    
-	private Rigidbody2D rigid;
-    
-	public bool alive = false;
-	public float m_gravityScale = 100f;
-
-	public void Start () {
-        score = 0;        
+	public void Start () {  
         txtScore.text = "" + score;
-        
-		this.transform.position = m_spawnPos;
-
-		alive = false; // Don't start until user has elected to start.
-   
-        rigid = GetComponent<Rigidbody2D>();
-        Freeze ();
+		rigid = GetComponent<Rigidbody2D>();
+        this.transform.position = m_spawnPos; // Set hardcoded default position.
         rigid.velocity = Vector2.zero; //set velocity to 0 otherwise results in unexpected behaviour unpon reset.
+		Freeze ();
+	}
+
+	public void Spawn() {
+		alive = true;
+		Unfreeze ();
+		this.enabled = true;
 	}
 
 	public void Freeze() {
@@ -108,27 +107,34 @@ public class PlayerMovement : MonoBehaviour {
             
             //pause horizontal obstacle movement
     		m_obstacleManager.PauseObstacles();
-
-			/**
-			 * Called by the player on player's death.
-			 * Calls a group of methods that match the delegate 'void DeathAction()' method.
-			 * This allows the menu system to define a method that is only called upon PlayerDeath.
-			 * 
-			 * PlayerMovement (-> Refactor? PlayerController, PlayerAI, Player).
-			 *   -> i.e. does more than just movement.
-			 */
-			if (OnDeath == null) {
-				Debug.Log ("Error, no subscribed events to Player Death.");
-			} else {
-				Invoke("OnDeath", 1.5f);
-			}
-         
-            // Death animation.
-    		// Sound effect trigger - if sound enabled.
-    		// UI score display?
-    		// Other stuff?        
+			// Let the animation continue for a small time before proceeding.
+			Invoke("AfterDeathInvoker", 0.5f);
+			// Death animation.
+			// Sound effect trigger - if sound enabled.
+			// UI score display?
+			// Other stuff?    
     	}
     }
+
+	/**
+	 * Called by the player on player's death.
+	 * Calls a group of methods that match the delegate 'void DeathAction()' method.
+	 * This allows the menu system to define a method that is only called upon PlayerDeath.
+	 * 
+	 * I think doing it this way is better, right?
+	 * Like for instance ObstacleMovement currently 
+	 * 
+	 * PlayerMovement (-> Refactor? PlayerController, PlayerAI, Player).
+	 *   -> i.e. does more than just movement.
+	 */
+	void AfterDeathInvoker() {
+		if (PostPlayerDeath == null) {
+			Debug.Log ("Error, no subscribed events to Player Death.");
+		} else {
+			PostPlayerDeath ();
+		}
+		Start ();
+	}
     
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -158,11 +164,4 @@ public class PlayerMovement : MonoBehaviour {
         
         body.AddForce (dir.normalized * expForce * calc);
     }
-
-    public void ShowMainMenu()
-    {
-        m_canvas.SetActive (true);
-        txtScore.enabled = false;
-    }
-    
 }

@@ -8,13 +8,11 @@ public class ObstacleManager : MonoBehaviour {
 	public GameObject m_obstaclePrefab;
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
-
-    public Vector3 m_spawnOrigin;
-
-	// Poor form, but quick.
 	private Vector3 m_pairOne = new Vector3(0f, 0f, 1f);
 	private Vector3 m_pairTwo = new Vector3(300f, 0f, 1f);
 	private Vector3 m_pairThree = new Vector3(600f, 0f, 1f);
+
+    public Vector3 m_spawnOrigin;
     
     private int obstNum = 0;
 
@@ -37,17 +35,6 @@ public class ObstacleManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//if (m_started && !m_paused) {
-//			foreach (GameObject obstacle in m_obstacleObjects) {
-//				// Update all game objects positions
-//				for (int i = 0; i < 3; i++) {
-//					Rigidbody2D obstacleBody = obstacle.transform.GetChild (i).GetComponent<Rigidbody2D> ();
-//					Vector3 curPos = obstacleBody.position;
-//					curPos.x -= m_speed * Time.deltaTime;
-//					obstacleBody.position = curPos;
-//				}
-//			}
-		//}
 	}
 
 	public void destroyAll () {

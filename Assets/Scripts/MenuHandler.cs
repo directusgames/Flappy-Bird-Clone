@@ -15,20 +15,25 @@ public class MenuHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-    
         firstRun = true;
+		PlayerMovement.PostPlayerDeath += ShowMainMenu; // Show the main menu on player death.
 	}
 		
+	public void ShowMainMenu() {
+		m_canvas.SetActive (true);
+		txtScore.enabled = false;
+	}
+
+	// Called by On Click() of "Start Button" game object.
 	public void startGame() {
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;
         
 		m_canvas.SetActive (false);
-		m_playerMovement.Start ();
+		// m_playerMovement.Start (); // Shouldn't need to call this? Automatically called isn't it?
         
         colliderGenerator.GetComponent<BoxCollider2D>().enabled = true;
         colliderDestroyer.GetComponent<BoxCollider2D>().enabled = true;
-        
         
 		if(!firstRun)
         {
@@ -41,9 +46,8 @@ public class MenuHandler : MonoBehaviour {
             colliderGenerator.create = true;
         }
         
-		m_playerMovement.alive = true;
-		m_playerMovement.Unfreeze ();
-		m_playerMovement.enabled = true;
+		// Spawn player.
+		m_playerMovement.Spawn();
 		m_obstacleManager.StartObstacles();
 		m_obstacleManager.UnpauseObstacles();
         txtScore.enabled = true;
@@ -52,8 +56,5 @@ public class MenuHandler : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		if (!m_playerMovement.alive) {
-			Debug.Log ("playerded");
-		}
 	}
 }
