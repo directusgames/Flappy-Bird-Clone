@@ -12,9 +12,11 @@ public class PlayerMovement : MonoBehaviour {
 	public bool alive = false; // Don't start until user has elected to start.
 	public int score = 0;
 	public float jumpForce;
-	public float m_gravityScale = 100f;
+	public float m_gravityScale = 700f;
 	private Rigidbody2D rigid;
 	public float m_explodeDuration = 0.25f;
+
+	public bool copterMode = true;
 
 	// Define global event callback for player death.
 	public delegate void DeathEvent();
@@ -67,11 +69,17 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         if (alive)
         {
-            if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-               rigid.velocity = Vector2.zero;
-               rigid.AddForce(new Vector2(0f, 1f) *  jumpForce);
-            }
+			if (copterMode) {
+				if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton (0)) {
+					rigid.velocity = Vector2.zero;
+					rigid.AddForce (new Vector2 (0f, 0.5f) * jumpForce /2f );
+				}
+			} else {
+				if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {
+					rigid.velocity = Vector2.zero;
+					rigid.AddForce (new Vector2 (0f, 1f) * jumpForce);
+				}
+			}
         }
         //Debug.Log (rigid.velocity);
 	}
@@ -124,7 +132,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	/**
 	 * Actions that should happen when the player dies.
-	 * Responsible for resetting the player for the next round.
 	 */
 	void Death() {
 		// Update self.
