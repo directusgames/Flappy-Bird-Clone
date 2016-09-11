@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class ChangeLevel : MonoBehaviour {
+public class GameLogic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

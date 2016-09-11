@@ -26,7 +26,13 @@ public class ObstacleManager : MonoBehaviour {
 		pairThree.transform.position = m_pairThree;
         PauseObstacles();
         StopObstacles();
+		MenuHandler.StartRound += StartRound;
     }
+
+	public void StartRound() {
+		StartObstacles();
+		UnpauseObstacles();
+	}
 
 	public void Reset () {
 		destroyAll ();

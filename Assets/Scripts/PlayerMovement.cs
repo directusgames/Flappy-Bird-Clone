@@ -2,6 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/*
+ * PlayerMovement (-> Refactor? PlayerController, PlayerAI, Player).
+ *   -> i.e. does more than just movement.
+*/
 public class PlayerMovement : MonoBehaviour {
 	// Player properties.
 	public Vector3 m_spawnPos = new Vector3(-183f, 3f, -1f);
@@ -10,12 +14,17 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpForce;
 	public float m_gravityScale = 100f;
 	private Rigidbody2D rigid;
+	public float m_explodeDuration = 0.25f;
 
 	// Define global event callback for player death.
-	public delegate void PostDeath();
-	public static event PostDeath PostPlayerDeath;
+	public delegate void DeathEvent();
+	public static event DeathEvent PlayerDeath;
 
-		// Obstacle manager.
+	// Define global event callback for after the players explode animatino.
+	public delegate void ExplodeEvent();
+	public static event ExplodeEvent PostPlayerExplode;
+
+	// Obstacle manager.
 	public ObstacleManager m_obstacleManager;
 	public ColliderGenerator collGen;
 	public ColliderDestroyer collDes;
@@ -25,17 +34,26 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject m_canvas, deathExplosion;
 
 	public void Start () {  
-        txtScore.text = "" + score;
 		rigid = GetComponent<Rigidbody2D>();
-        this.transform.position = m_spawnPos; // Set hardcoded default position.
-        rigid.velocity = Vector2.zero; //set velocity to 0 otherwise results in unexpected behaviour unpon reset.
-		Freeze ();
+		MenuHandler.StartRound += StartRound;
+		Reset ();
 	}
 
-	public void Spawn() {
+	/**
+	 * Registered as a metod callback for StartRoundEvent.
+	 */
+	public void StartRound() {
+		Reset ();
 		alive = true;
 		Unfreeze ();
 		this.enabled = true;
+	}
+
+	public void Reset() {
+		this.enabled = false;
+		this.transform.position = m_spawnPos; // Set hardcoded default position.
+		rigid.velocity = Vector2.zero; //set velocity to 0 otherwise results in unexpected behaviour unpon reset.
+		Freeze ();
 	}
 
 	public void Freeze() {
@@ -58,89 +76,80 @@ public class PlayerMovement : MonoBehaviour {
         //Debug.Log (rigid.velocity);
 	}
 
-	void Death() {
-		
-            alive = false;
-            //Create death explosion effect
-            // GameObject deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
-			Instantiate(deathExplosion, transform.position, Quaternion.identity);
-            //Slow time and lower delta time step so we don't get low fps.
-            Time.timeScale = 0.1f;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
-            
-            Rigidbody2D[] rigids = null;
-            
-            //Iterate through all obstacle pairs in the list, get their rigid bodies and apply an explosion force to them            
-            foreach(GameObject obstaclePair in m_obstacleManager.m_obstacleObjects)
-            {
-                rigids = obstaclePair.GetComponentsInChildren<Rigidbody2D>();
-                foreach(Rigidbody2D rig in rigids)
-                {
-                    //rig.transform.parent = null;
-                    rig.isKinematic = false;                
-                    //AddExplosionForce(rig, 1000f, transform.position, 5000f);
-                    if(rig.gameObject.name == "Top")
-                    {
-                        rig.velocity = new Vector2(1,1) * 500f;
-                        // Debug.Log ("Top " + rig.velocity);
-                        
-                    }
-                    else if(rig.gameObject.name == "Bottom")
-                    {
-                        rig.velocity = new Vector2(1,1) * 500f;
-                        // Debug.Log ("Bot " + rig.velocity);
-                    }
-                    // Debug.Log (rigid.name + ": " + rigid.velocity);
-                    rig.angularVelocity = Random.Range(150f, 300f);
-                }
-            }
-            
-            //turn off player sprite for now
-            //GetComponent<SpriteRenderer>().enabled = false;
-           
-            //Turn off creation collider as flying obstacles could drigger it           
-            collGen.create = false;
-            collGen.GetComponent<BoxCollider2D>().enabled = false;
-            collDes.GetComponent<BoxCollider2D>().enabled = false;
-            
-            //pause horizontal obstacle movement
-    		m_obstacleManager.PauseObstacles();
-			// Let the animation continue for a small time before proceeding.
-			Invoke("AfterDeathInvoker", 0.5f);
-			// Death animation.
-			// Sound effect trigger - if sound enabled.
-			// UI score display?
-			// Other stuff?    
-    	
-    }
+	void Explode() {
+		// Create death explosion effect
+		Instantiate(deathExplosion, transform.position, Quaternion.identity);
+		// Slow time and lower delta time step so we don't get low fps.
+		Time.timeScale = 0.1f;
+		Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+		Rigidbody2D[] rigids = null;
+
+		//Iterate through all obstacle pairs in the list, get their rigid bodies and apply an explosion force to them            
+		foreach(GameObject obstaclePair in m_obstacleManager.m_obstacleObjects)
+		{
+			rigids = obstaclePair.GetComponentsInChildren<Rigidbody2D>();
+			foreach(Rigidbody2D rig in rigids)
+			{
+				//rig.transform.parent = null;
+				rig.isKinematic = false;                
+				//AddExplosionForce(rig, 1000f, transform.position, 5000f);
+				if(rig.gameObject.name == "Top")
+				{
+					rig.velocity = new Vector2(1,1) * 500f;
+					// Debug.Log ("Top " + rig.velocity);
+
+				}
+				else if(rig.gameObject.name == "Bottom")
+				{
+					rig.velocity = new Vector2(1,1) * 500f;
+					// Debug.Log ("Bot " + rig.velocity);
+				}
+				// Debug.Log (rigid.name + ": " + rigid.velocity);
+				rig.angularVelocity = Random.Range(150f, 300f);
+			}
+		}
+
+		//turn off player sprite for now
+		//GetComponent<SpriteRenderer>().enabled = false;
+
+		//Turn off creation collider as flying obstacles could drigger it           
+		collGen.create = false;
+		collGen.GetComponent<BoxCollider2D>().enabled = false;
+		collDes.GetComponent<BoxCollider2D>().enabled = false;
+
+		//pause horizontal obstacle movement
+		m_obstacleManager.PauseObstacles();
+	}
 
 	/**
-	 * Called by the player on player's death.
-	 * Calls a group of methods that match the delegate 'void DeathAction()' method.
-	 * This allows the menu system to define a method that is only called upon PlayerDeath.
-	 * 
-	 * I think doing it this way is better, right?
-	 * Like for instance ObstacleMovement currently 
-	 * 
-	 * PlayerMovement (-> Refactor? PlayerController, PlayerAI, Player).
-	 *   -> i.e. does more than just movement.
+	 * Actions that should happen when the player dies.
+	 * Responsible for resetting the player for the next round.
 	 */
-	void AfterDeathInvoker() {
-		if (PostPlayerDeath == null) {
-			Debug.Log ("Error, no subscribed events to Player Death.");
-		} else {
-			PostPlayerDeath ();
+	void Death() {
+		// Update self.
+		alive = false; // Don't update controls.
+
+		// Update others.
+		if (PlayerDeath != null) { // Run PlayerDeathEvent callbacks.
+			PlayerDeath ();
+			// Sound effect trigger - if sound enabled.
+			// UI score display?
+			// Other stuff?
 		}
-		Start ();
+
+		Explode(); // Play explode animation.
+		Invoke("PostExplode", m_explodeDuration); // Allow PostExplode callbacks to run after m_explodeDuration.
+    }
+
+	void PostExplode() {
+		// Invoke PostPlayerExplode methods, after the explode animation has ran.
+		if (PostPlayerExplode != null) { PostPlayerExplode (); }
 	}
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Obstacle")
-        {
-			// Player has hit a randomly generated obstacle.
-			Death();
-        }
+        if (coll.gameObject.tag == "Obstacle") { Death(); }
     }
     
     void OnTriggerEnter2D(Collider2D coll)
