@@ -144,8 +144,8 @@ public class ObstacleManager : MonoBehaviour {
         Transform top = obs.GetComponent<ObstacleMovement>().topObs.transform;
         Transform bot = obs.GetComponent<ObstacleMovement>().botObs.transform;
         
-        Debug.Log ("Created " + obs.name + ", delta height is : " + deltaHeight);
-        
+        //Change the scale of the obstacle as well as the position which changes when unity scales the object. This position change
+        //moves it back to its original placement.
         if(deltaHeight >= 0)
         {            
             top.localScale = new Vector3(top.localScale.x, top.localScale.y + deltaHeight, top.localScale.z);
