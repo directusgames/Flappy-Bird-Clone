@@ -113,7 +113,10 @@ public class PlayerMovement : MonoBehaviour {
             m_obstacleManager.PauseObstacles();
             
 			// Disable the scoring collider, so that it doesn't fly into the user.
-
+			GameObject[] pointColliders = GameObject.FindGameObjectsWithTag("PointsCollider");
+			foreach (GameObject pointCollider in pointColliders) {
+				pointCollider.SetActive (false);
+			}
 
             Invoke ("ActivateCanvas", 0.75f);
          
