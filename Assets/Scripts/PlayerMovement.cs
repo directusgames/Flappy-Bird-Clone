@@ -56,9 +56,15 @@ public class PlayerMovement : MonoBehaviour {
         //Debug.Log (rigid.velocity);
 	}
 
+	/**
+	 * I think rather than the player having knowledge of ObstacleManager, etc.
+	 * A global event could be triggered.
+	 * Then the logic for handling player death can be inside of ObstacleManager.
+	 * Or, perhaps we'd have a separate class/script that does this.
+	 */
 	void Death() {
 		// Pause obstacle movement
-        if(alive)
+        if (alive)
         {
             alive = false;
             //Create death explosion effect
@@ -98,7 +104,7 @@ public class PlayerMovement : MonoBehaviour {
             // turn off player sprite for now
             // GetComponent<SpriteRenderer>().enabled = false;
            
-            // Turn off creation collider as flying obstacles could drigger it
+            // Turn off creation/destruction collider as flying obstacles could drigger it.
             collGen.create = false;
             collGen.GetComponent<BoxCollider2D>().enabled = false;
             collDes.GetComponent<BoxCollider2D>().enabled = false;
@@ -106,6 +112,9 @@ public class PlayerMovement : MonoBehaviour {
             // Stop the obstacles from perpetually moving left.
             m_obstacleManager.PauseObstacles();
             
+			// Disable the scoring collider, so that it doesn't fly into the user.
+
+
             Invoke ("ActivateCanvas", 0.75f);
          
             // Death animation.

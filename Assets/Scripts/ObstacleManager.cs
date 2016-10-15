@@ -101,6 +101,8 @@ public class ObstacleManager : MonoBehaviour {
         {
             ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
             om.paused = true;
+			GameObject pointsCollider = om.transform.FindChild ("PointsCollider").gameObject;
+			pointsCollider.SetActive (false);
         }
     }
     
@@ -111,7 +113,9 @@ public class ObstacleManager : MonoBehaviour {
         {
             ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
             om.paused = false;
-        }
+			GameObject pointsCollider = om.transform.FindChild ("PointsCollider").gameObject;
+			pointsCollider.SetActive (true);
+		}
     }
     
     public void StartObstacles()
