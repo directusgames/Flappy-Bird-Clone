@@ -3,15 +3,16 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-	
     public ObstacleManager m_obstacleManager;
     public ColliderGenerator collGen;
     public ColliderDestroyer collDes;
     
-	public GameObject buttons, deathExplosion;
+	public MenuHandler m_menuHandler;
+	public GameObject m_mainMenu;
+	public GameObject deathExplosion;
     
+	// Don't think the player object should set the score. *shrug*.
     public Text txtScore;
-    
     public int score;
 
     public float jumpForce;
@@ -26,7 +27,6 @@ public class PlayerMovement : MonoBehaviour {
 	public void Start () {
         score = 0;        
         txtScore.text = "" + score;
-        
 		this.transform.position = m_spawnPos;
         
 		alive = false; // Don't start until user has elected to start.
@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.gameObject.tag == "PointsCollider")
+        if (coll.gameObject.tag == "PointsCollider")
         {
             score++;
             txtScore.text = "" + score;
@@ -155,10 +155,16 @@ public class PlayerMovement : MonoBehaviour {
         body.AddForce (dir.normalized * expForce * calc);
     }
     
+	/**
+	 * Activate the main menu.
+	 * We work around the death animation by calling this with invoke.
+	 * Hence having a wrapper method here.
+	 * Pretty silly, but works.
+	 * 
+	 */
     public void ActivateCanvas()
     {
-        buttons.SetActive (true);
-        txtScore.enabled = false;
+		m_menuHandler.mainMenu ();
     }
     
 }
