@@ -95,27 +95,23 @@ public class PlayerMovement : MonoBehaviour {
                 }
             }
             
-            //turn off player sprite for now
-            //GetComponent<SpriteRenderer>().enabled = false;
+            // turn off player sprite for now
+            // GetComponent<SpriteRenderer>().enabled = false;
            
-            //Turn off creation collider as flying obstacles could drigger it           
+            // Turn off creation collider as flying obstacles could drigger it
             collGen.create = false;
             collGen.GetComponent<BoxCollider2D>().enabled = false;
             collDes.GetComponent<BoxCollider2D>().enabled = false;
-
             
-            //pause horizontal obstacle movement
-    		m_obstacleManager.PauseObstacles();
+            // Stop the obstacles from perpetually moving left.
+            m_obstacleManager.PauseObstacles();
             
             Invoke ("ActivateCanvas", 0.75f);
-            
          
             // Death animation.
     		// Sound effect trigger - if sound enabled.
     		// UI score display?
     		// Other stuff?
-            
-            
     	}
     }
     
