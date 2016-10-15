@@ -115,7 +115,7 @@ public class ObstacleManager : MonoBehaviour {
         {
             ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
             om.paused = false;
-        }
+		}
     }
     
     public void StartObstacles()
