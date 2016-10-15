@@ -52,8 +52,7 @@ public class PlayerMovement : MonoBehaviour {
                rigid.velocity = Vector2.zero;
                rigid.AddForce(new Vector2(0f, 1f) *  jumpForce);
             }
-        }
-        //Debug.Log (rigid.velocity);
+        }        //Debug.Log (rigid.velocity);
 	}
 
 	/**
