@@ -8,6 +8,7 @@ public class ObstacleManager : MonoBehaviour {
 	public GameObject m_obstaclePrefab;
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
+    public float maxVertChange, minVertChange;
 
     public Vector3 m_spawnOrigin;
 
@@ -86,6 +87,9 @@ public class ObstacleManager : MonoBehaviour {
 			m_spawnOrigin,
 			Quaternion.identity
 		);
+        
+        //Randomise obstacle height
+        AdjustObstacleHeight(newObs, Random.Range (minVertChange, maxVertChange));
 		newObs.transform.parent = this.transform;
         newObs.name = "Pair " + obstNum;
         obstNum++;
@@ -123,6 +127,7 @@ public class ObstacleManager : MonoBehaviour {
             om.started = true;
         }
     }
+   
     
     public void StopObstacles()
     {
@@ -131,6 +136,32 @@ public class ObstacleManager : MonoBehaviour {
         {
             ObstacleMovement om = obs.GetComponent<ObstacleMovement>();
             om.started = false;
+        }
+    }
+    
+    private void AdjustObstacleHeight(GameObject obs, float deltaHeight)
+    {
+        Transform top = obs.GetComponent<ObstacleMovement>().topObs.transform;
+        Transform bot = obs.GetComponent<ObstacleMovement>().botObs.transform;
+        
+        Debug.Log ("Created " + obs.name + ", delta height is : " + deltaHeight);
+        
+        if(deltaHeight >= 0)
+        {            
+            top.localScale = new Vector3(top.localScale.x, top.localScale.y + deltaHeight, top.localScale.z);
+            top.position = new Vector3(top.position.x, top.position.y - deltaHeight/2, top.position.z);
+            
+            bot.localScale = new Vector3(bot.localScale.x, bot.localScale.y - deltaHeight, bot.localScale.z);            
+            bot.position = new Vector3(bot.position.x, bot.position.y - deltaHeight/2, bot.position.z);
+        }
+        else
+        {
+            deltaHeight = Mathf.Abs(deltaHeight);
+            top.localScale = new Vector3(top.localScale.x, top.localScale.y - deltaHeight, top.localScale.z);            
+            top.position = new Vector3(top.position.x, top.position.y + deltaHeight/2, top.position.z);
+            
+            bot.localScale = new Vector3(bot.localScale.x, bot.localScale.y + deltaHeight, bot.localScale.z);
+            bot.position = new Vector3(bot.position.x, bot.position.y + deltaHeight/2, bot.position.z);
         }
     }
 }

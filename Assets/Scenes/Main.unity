@@ -1078,6 +1078,8 @@ MonoBehaviour:
     type: 2}
   m_createCollider: {fileID: 1584062709}
   m_destroyCollider: {fileID: 926502616}
+  maxVertChange: 100
+  minVertChange: -100
   m_spawnOrigin: {x: 650, y: 0, z: 1}
 --- !u!1 &1427792487
 GameObject:
@@ -1191,7 +1193,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1427792487}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

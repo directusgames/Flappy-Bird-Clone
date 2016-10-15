@@ -26,7 +26,7 @@ public class ColliderGenerator : MonoBehaviour {
             if(create)
             {   
                 create = false;
-                Debug.Log ("Entering collider: " + coll.gameObject.name);
+                //Debug.Log ("Entering collider: " + coll.gameObject.name);
                 obstacleManager.createObstacle ();
             }
         }           
