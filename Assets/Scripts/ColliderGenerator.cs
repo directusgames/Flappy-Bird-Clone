@@ -9,9 +9,7 @@ public class ColliderGenerator : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-        
         create = false;
-	    
 	}
 	
 	// Update is called once per frame

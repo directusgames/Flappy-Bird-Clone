@@ -88,15 +88,15 @@ public class PlayerMovement : MonoBehaviour {
                     if(rig.gameObject.name == "Top")
                     {
                         rig.velocity = new Vector2(1,1) * 50f;
-                        Debug.Log ("Top " + rig.velocity);
+                        // Debug.Log ("Top " + rig.velocity);
                         
                     }
                     else if(rig.gameObject.name == "Bottom")
                     {
                         rig.velocity = new Vector2(1,-1) * 50f;
-                        Debug.Log ("Bot " + rig.velocity);
+                        // Debug.Log ("Bot " + rig.velocity);
                     }
-                    Debug.Log (rigid.name + ": " + rigid.velocity);
+                    // Debug.Log (rigid.name + ": " + rigid.velocity);
                     rig.angularVelocity = Random.Range(-20f, 20f);
                 }
             }

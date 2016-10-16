@@ -37,18 +37,9 @@ public class MenuHandler : MonoBehaviour {
         
         colliderGenerator.GetComponent<BoxCollider2D>().enabled = true;
         colliderDestroyer.GetComponent<BoxCollider2D>().enabled = true;
-        
-        
-		if(!firstRun)
-        {
-            colliderGenerator.create = false;
-            m_obstacleManager.Reset();
-        }
-        else
-        {
-            firstRun = false;
-            colliderGenerator.create = true;
-        }
+                
+		m_obstacleManager.Reset();
+		colliderGenerator.create = true;
         
 		m_playerMovement.alive = true;
 		m_playerMovement.Unfreeze ();
