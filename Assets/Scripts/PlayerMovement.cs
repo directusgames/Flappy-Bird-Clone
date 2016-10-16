@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour {
         if (alive)
         {
             alive = false;
+
             //Create death explosion effect
             GameObject deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
             
@@ -121,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
 				PlayerPrefs.SetInt ("highScore", score);
 			}
 
-            Invoke ("ActivateCanvas", 0.75f);
+			m_menuHandler.deathMenu ();
          
             // Death animation.
     		// Sound effect trigger - if sound enabled.
@@ -158,17 +159,4 @@ public class PlayerMovement : MonoBehaviour {
         
         body.AddForce (dir.normalized * expForce * calc);
     }
-    
-	/**
-	 * Activate the main menu.
-	 * We work around the death animation by calling this with invoke.
-	 * Hence having a wrapper method here.
-	 * Pretty silly, but works.
-	 * 
-	 */
-    public void ActivateCanvas()
-    {
-		m_menuHandler.deathMenu ();
-    }
-    
 }

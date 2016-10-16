@@ -76,6 +76,7 @@ public class MenuHandler : MonoBehaviour {
 
 	public void deathMenu() {
 		m_deathMenu.SetActive (true);
+		txtScore.enabled = false;
 		m_deathScore.text = "Score: " + txtScore.text;
 		m_deathHighScore.text = "High Score: " + PlayerPrefs.GetInt ("highScore");
 	}
