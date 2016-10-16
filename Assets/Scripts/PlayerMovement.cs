@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour {
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Obstacle")
+        if (coll.gameObject.tag == "Obstacle" || coll.gameObject.tag == "floorDeath")
         {
 			// Player has hit a randomly generated obstacle.
 			Death();
