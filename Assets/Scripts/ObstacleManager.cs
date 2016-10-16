@@ -14,19 +14,13 @@ public class ObstacleManager : MonoBehaviour {
 
 	// Poor form, but quick.
 	private Vector3 m_pairOne = new Vector3(0f, 50f, 1f);
-	private Vector3 m_pairTwo = new Vector3(300f, 50f, 1f);
-	private Vector3 m_pairThree = new Vector3(600f, 50f, 1f);
-    
+   
     private int obstNum = 0;
 
 	// Use this for initialization
 	public void Start () {
 		GameObject pairOne = this.createObstacle ();
-		GameObject pairTwo = this.createObstacle ();
-		GameObject pairThree = this.createObstacle ();
 		pairOne.transform.position = m_pairOne;
-		pairTwo.transform.position = m_pairTwo;
-		pairThree.transform.position = m_pairThree;
         PauseObstacles();
         StopObstacles();
     }

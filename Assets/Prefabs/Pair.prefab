@@ -348,6 +348,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topObs: {fileID: 1000013856786958}
   botObs: {fileID: 1000013056089214}
-  speed: 150
+  speed: 80
   started: 0
   paused: 0
