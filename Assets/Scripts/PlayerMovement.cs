@@ -117,6 +117,10 @@ public class PlayerMovement : MonoBehaviour {
 				pointCollider.SetActive (false);
 			}
 
+			if (score > PlayerPrefs.GetInt ("highScore")) {
+				PlayerPrefs.SetInt ("highScore", score);
+			}
+
             Invoke ("ActivateCanvas", 0.75f);
          
             // Death animation.
@@ -164,7 +168,7 @@ public class PlayerMovement : MonoBehaviour {
 	 */
     public void ActivateCanvas()
     {
-		m_menuHandler.mainMenu ();
+		m_menuHandler.deathMenu ();
     }
     
 }
