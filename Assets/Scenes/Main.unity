@@ -1231,7 +1231,7 @@ MonoBehaviour:
   txtScore: {fileID: 1957019602}
   score: 0
   jumpForce: 21000
-  m_spawnPos: {x: -183, y: 3, z: -1}
+  m_spawnPos: {x: -121, y: -43, z: -1}
   alive: 0
   m_gravityScale: 100
 --- !u!212 &1427792490
@@ -1274,7 +1274,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1427792487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -185, y: -101, z: -1}
+  m_LocalPosition: {x: -121, y: -43, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
