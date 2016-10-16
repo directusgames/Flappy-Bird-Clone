@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public float jumpForce;
 
-	public Vector3 m_spawnPos = new Vector3(-183f, 3f, -1f);
+	public Vector3 m_spawnPos = new Vector3(-183f, 40f, -1f);
     
 	private Rigidbody2D rigid;
     
