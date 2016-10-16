@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; // List<>.
 
 public class ObstacleManager : MonoBehaviour {
 	public float m_speed;

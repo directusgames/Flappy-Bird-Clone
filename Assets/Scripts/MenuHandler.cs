@@ -11,18 +11,24 @@ public class MenuHandler : MonoBehaviour {
 
 	public GameObject m_mainMenu;
 	public GameObject m_settingsMenu;
+	public GameObject m_deathMenu;
     
 	public Text txtScore;
+	public Text m_deathScore;
+	public Text m_deathHighScore;
     
     bool firstRun;
 
 	// Use this for initialization
 	void Start () {
-    
-        firstRun = true;
+    	firstRun = true;
 	}
 
 	public void startGame() {
+		// Disable all menus when the game commences.
+		foreach (GameObject menu in GameObject.FindGameObjectsWithTag("canvas")) {
+		  menu.SetActive(false);
+		}
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;
         
@@ -53,15 +59,26 @@ public class MenuHandler : MonoBehaviour {
 		// SceneManager.LoadScene(1);
 	}
 
+	// These menu methods are bad form.
+	// They just toggle one another.
+	// Doesn't scale very well.
 	public void mainMenu() {
 		m_mainMenu.SetActive (true);
 		txtScore.enabled = false;
 		m_settingsMenu.SetActive (false);
+		m_deathMenu.SetActive (false);
 	}
 
 	public void settingsMenu() {
 		m_mainMenu.SetActive (false);
 		m_settingsMenu.SetActive (true);
+	}
+
+	public void deathMenu() {
+		m_deathMenu.SetActive (true);
+		txtScore.enabled = false;
+		m_deathScore.text = "Score: " + txtScore.text;
+		m_deathHighScore.text = "High Score: " + PlayerPrefs.GetInt ("highScore");
 	}
     
     public void CloseApplication()
