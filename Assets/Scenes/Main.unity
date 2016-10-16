@@ -1171,9 +1171,9 @@ MonoBehaviour:
     type: 2}
   m_createCollider: {fileID: 1584062709}
   m_destroyCollider: {fileID: 926502616}
-  maxVertChange: 100
-  minVertChange: -100
-  m_spawnOrigin: {x: 70, y: 50, z: 1}
+  maxVertChange: 20
+  minVertChange: -20
+  m_spawnOrigin: {x: 120, y: 50, z: 1}
 --- !u!1 &1427792487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,9 +1291,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.33, y: 0}
   serializedVersion: 2
-  m_Radius: 16
+  m_Radius: 12.033981
 --- !u!114 &1427792493
 MonoBehaviour:
   m_ObjectHideFlags: 0

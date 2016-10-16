@@ -13,7 +13,7 @@ public class ObstacleManager : MonoBehaviour {
     public Vector3 m_spawnOrigin;
 
 	// Poor form, but quick.
-	private Vector3 m_pairOne = new Vector3(0f, 50f, 1f);
+	private Vector3 m_pairOne = new Vector3(50f, 50f, 1f);
    
     private int obstNum = 0;
 
@@ -135,27 +135,9 @@ public class ObstacleManager : MonoBehaviour {
     
     private void AdjustObstacleHeight(GameObject obs, float deltaHeight)
     {
-        Transform top = obs.GetComponent<ObstacleMovement>().topObs.transform;
-        Transform bot = obs.GetComponent<ObstacleMovement>().botObs.transform;
-        
         //Change the scale of the obstacle as well as the position which changes when unity scales the object. This position change
         //moves it back to its original placement.
-        if(deltaHeight >= 0)
-        {            
-            top.localScale = new Vector3(top.localScale.x, top.localScale.y + deltaHeight, top.localScale.z);
-            top.position = new Vector3(top.position.x, top.position.y - deltaHeight/2, top.position.z);
-            
-            bot.localScale = new Vector3(bot.localScale.x, bot.localScale.y - deltaHeight, bot.localScale.z);            
-            bot.position = new Vector3(bot.position.x, bot.position.y - deltaHeight/2, bot.position.z);
-        }
-        else
-        {
-            deltaHeight = Mathf.Abs(deltaHeight);
-            top.localScale = new Vector3(top.localScale.x, top.localScale.y - deltaHeight, top.localScale.z);            
-            top.position = new Vector3(top.position.x, top.position.y + deltaHeight/2, top.position.z);
-            
-            bot.localScale = new Vector3(bot.localScale.x, bot.localScale.y + deltaHeight, bot.localScale.z);
-            bot.position = new Vector3(bot.position.x, bot.position.y + deltaHeight/2, bot.position.z);
-        }
+        
+        obs.transform.position += new Vector3(0f, deltaHeight, 0f);
     }
 }
