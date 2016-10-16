@@ -86,17 +86,17 @@ public class PlayerMovement : MonoBehaviour {
                     //AddExplosionForce(rig, 1000f, transform.position, 5000f);
                     if(rig.gameObject.name == "Top")
                     {
-                        rig.velocity = new Vector2(1,1) * 500f;
+                        rig.velocity = new Vector2(1,1) * 50f;
                         Debug.Log ("Top " + rig.velocity);
                         
                     }
                     else if(rig.gameObject.name == "Bottom")
                     {
-                        rig.velocity = new Vector2(1,1) * 500f;
+                        rig.velocity = new Vector2(1,-1) * 50f;
                         Debug.Log ("Bot " + rig.velocity);
                     }
                     Debug.Log (rigid.name + ": " + rigid.velocity);
-                    rig.angularVelocity = Random.Range(150f, 300f);
+                    rig.angularVelocity = Random.Range(-20f, 20f);
                 }
             }
             
