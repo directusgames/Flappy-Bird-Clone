@@ -13,9 +13,20 @@ public class MenuHandler : MonoBehaviour {
 	public GameObject m_settingsMenu;
 	public GameObject m_deathMenu;
     
+	public Text deathTitle;
+	public int deathTitlePtr = 0;
 	public Text txtScore;
-	public Text m_deathScore;
-	public Text m_deathHighScore;
+
+	public string[] deathPhrases = {
+		"Shaved!", "RIP Beard", "Clean shave = early grave",
+		"De-bearded :'(", "rekt"
+	};
+
+	// Var names could be better:
+	public Text m_deathScore; // Score title.
+	public Text m_deathScoreValue; // Score value.
+	public Text m_deathHighScore; // High score title.
+	public Text m_deathHighScoreValue; // High score value;
     
     bool firstRun;
 
@@ -56,6 +67,8 @@ public class MenuHandler : MonoBehaviour {
 	public void mainMenu() {
 		m_mainMenu.SetActive (true);
 		txtScore.enabled = false;
+		m_deathScoreValue.enabled = false;
+		m_deathHighScoreValue.enabled = false;
 		m_settingsMenu.SetActive (false);
 		m_deathMenu.SetActive (false);
 	}
@@ -66,10 +79,27 @@ public class MenuHandler : MonoBehaviour {
 	}
 
 	public void deathMenu() {
+		int priorPtr = deathTitlePtr;
+		// Randomly change death message.
+		deathTitlePtr = Random.Range (0, deathPhrases.Length);
+		// Hack for preventing randomly receiving the exact same death message.
+		if (deathPhrases.Length > 1 && priorPtr == deathTitlePtr) { 
+			if ((deathTitlePtr + 1) > deathPhrases.Length) {
+				deathTitlePtr = 0;
+			} else {
+				deathTitlePtr++;
+			}
+		}
+		deathTitle.text = deathPhrases [deathTitlePtr];
+
 		m_deathMenu.SetActive (true);
 		txtScore.enabled = false;
-		m_deathScore.text = "Score: " + txtScore.text;
-		m_deathHighScore.text = "High Score: " + PlayerPrefs.GetInt ("highScore");
+
+		m_deathScoreValue.text = txtScore.text;
+		m_deathScoreValue.enabled = true;
+
+		m_deathHighScoreValue.text = PlayerPrefs.GetInt ("highScore").ToString();
+		m_deathHighScoreValue.enabled = true;
 	}
     
     public void CloseApplication()
