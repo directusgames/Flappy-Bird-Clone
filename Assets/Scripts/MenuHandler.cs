@@ -8,6 +8,7 @@ public class MenuHandler : MonoBehaviour {
 	public ObstacleManager m_obstacleManager;
     public ColliderGenerator colliderGenerator;
     public ColliderDestroyer colliderDestroyer;
+    public ScrollBackground scrollBG;
 
 	public GameObject m_mainMenu;
 	public GameObject m_settingsMenu;
@@ -66,6 +67,7 @@ public class MenuHandler : MonoBehaviour {
 	}
 
 	public void deathMenu() {
+        scrollBG.stopped = true;
 		m_deathMenu.SetActive (true);
 		txtScore.enabled = false;
 		m_deathScore.text = "Score: " + txtScore.text;

@@ -5,6 +5,7 @@ public class ScrollBackground : MonoBehaviour {
     
     public float scrollSpeed;
     public Renderer rend;
+    public bool stopped;
     
 	// Use this for initialization
 	void Start () {
@@ -16,7 +17,10 @@ public class ScrollBackground : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    
-        float offset = Time.time * scrollSpeed;
-        rend.material.SetTextureOffset("_MainTex", new Vector2(offset,0));
-	}
+        if(!stopped)
+        {
+            float offset = Time.time * scrollSpeed;
+            rend.material.SetTextureOffset("_MainTex", new Vector2(offset,0));
+	    }
+    }
 }
