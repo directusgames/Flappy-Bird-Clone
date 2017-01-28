@@ -22,7 +22,11 @@ public class PlayerMovement : MonoBehaviour {
 	private Rigidbody2D rigid;
     
 	public bool alive = false;
-	public float m_gravityScale = 100f;
+	public float m_gravityScale = 1000f;
+    
+    private bool falling;
+    public Animator wingFlap;
+    public Animation anim;
 
 	public void Start () {
         score = 0;        
@@ -52,7 +56,27 @@ public class PlayerMovement : MonoBehaviour {
                rigid.velocity = Vector2.zero;
                rigid.AddForce(new Vector2(0f, 1f) *  jumpForce);
             }
-        }        //Debug.Log (rigid.velocity);
+        }
+        if(rigid.velocity.y < 0)
+        {
+            falling = true;        
+        }
+        else
+        {
+            falling = false;
+        }
+        
+        if(falling)
+        {
+            wingFlap.enabled = false;
+        }
+        else
+        {
+            wingFlap.enabled = true;
+        }
+        
+        
+     //Debug.Log (rigid.velocity);
 	}
 
 	/**

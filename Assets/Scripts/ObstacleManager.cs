@@ -75,7 +75,6 @@ public class ObstacleManager : MonoBehaviour {
 	 * Create a new collider at Vector3 m_spawnOrigin.
 	 */
 	public GameObject createObstacle() {
-        Debug.Log ("Creating obstacle. Time:" + Time.time);
 		GameObject newObs = (GameObject) Instantiate (
 			m_obstaclePrefab,
 			m_spawnOrigin,
