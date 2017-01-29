@@ -55,6 +55,7 @@ public class MenuHandler : MonoBehaviour {
 	// They just toggle one another.
 	// Doesn't scale very well.
 	public void mainMenu() {
+		GameObject.Find ("Player").GetComponent<PlayerMovement> ().Start ();
 		m_mainMenu.SetActive (true);
 		txtScore.enabled = false;
 		m_settingsMenu.SetActive (false);
