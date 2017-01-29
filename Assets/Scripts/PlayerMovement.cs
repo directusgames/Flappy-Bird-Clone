@@ -32,8 +32,13 @@ public class PlayerMovement : MonoBehaviour {
     public Animator wingFlap;
     public Animation anim;
     
+    private AudioSource audSource;
+    
 
 	public void Start () {
+        
+        audSource = GetComponent<AudioSource>();
+    
         if(deathEx != null)
         {
             Destroy (deathEx);
@@ -98,10 +103,16 @@ public class PlayerMovement : MonoBehaviour {
 	 * Or, perhaps we'd have a separate class/script that does this.
 	 */
 	void Death() {
-		// Pause obstacle movement
+		// Pause obstacle movement        
+      
         if (alive)
         {
             alive = false;
+            
+            int i = Random.Range (0, sfx.deathEffects.Count);
+            audSource.clip = sfx.deathEffects[i];
+            audSource.volume = 0.5f;
+            audSource.Play();
 
             //Create death explosion effect
             deathEx = (GameObject) Instantiate(deathExplosion, transform.position, Quaternion.identity);
@@ -184,6 +195,10 @@ public class PlayerMovement : MonoBehaviour {
         {
             score++;
             txtScore.text = "" + score;
+            
+            audSource.clip = sfx.pointScore;
+            audSource.volume = 1f;
+            audSource.Play();
         }
     }
     
