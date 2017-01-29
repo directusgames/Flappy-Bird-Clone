@@ -15,8 +15,13 @@ public class MenuHandler : MonoBehaviour {
 	public GameObject m_deathMenu;
     
 	public Text txtScore;
-	public Text m_deathScore;
-	public Text m_deathHighScore;
+
+	public Text m_deathMsg;
+	public string[] m_deathMsgs;
+	public int m_deathPtr;
+
+	public Text m_score;
+	public Text m_highScore;
     
     bool firstRun;
 
@@ -68,11 +73,22 @@ public class MenuHandler : MonoBehaviour {
 	}
 
 	public void deathMenu() {
+		// Hack for ensuring different message to last death.
+		int prevDeathPtr = m_deathPtr;
+		m_deathPtr = Random.Range (0, m_deathMsgs.Length);
+		if (prevDeathPtr == m_deathPtr) {
+			if (m_deathPtr == m_deathMsgs.Length) {
+				m_deathPtr = 0;
+			} else {
+				m_deathPtr++;
+			}
+		}
+		m_deathMsg.text = m_deathMsgs [m_deathPtr];
         scrollBG.stopped = true;
 		m_deathMenu.SetActive (true);
 		txtScore.enabled = false;
-		m_deathScore.text = "Score: " + txtScore.text;
-		m_deathHighScore.text = "High Score: " + PlayerPrefs.GetInt ("highScore");
+		m_score.text = txtScore.text;
+		m_highScore.text = PlayerPrefs.GetInt("highScore").ToString();
 	}
     
     public void CloseApplication()
