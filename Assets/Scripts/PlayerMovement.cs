@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     public ColliderGenerator collGen;
     public ColliderDestroyer collDes;
     public ScrollBackground scrollBG;
+    public SoundEffects sfx;
     
 	public MenuHandler m_menuHandler;
 	public GameObject m_mainMenu;

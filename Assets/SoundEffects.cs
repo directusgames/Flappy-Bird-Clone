@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundEffects : MonoBehaviour {
     
     public List<AudioClip> deathEffects;
+    public AudioClip pointScore;
     
 	// Use this for initialization
 	void Start () {
