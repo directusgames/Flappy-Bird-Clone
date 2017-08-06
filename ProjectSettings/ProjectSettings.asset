@@ -118,7 +118,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.directusgames.flappybirdclone
+  bundleIdentifier: com.directusgames.flappybeard
   bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0
@@ -194,8 +194,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: S:/GitHub/Flappy-Bird-Clone/new-keystore.keystore
+  AndroidKeyaliasName: flappybeard
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
