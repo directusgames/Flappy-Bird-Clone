@@ -9,6 +9,8 @@ public class ObstacleManager : MonoBehaviour {
 	public BoxCollider2D m_createCollider;
 	public BoxCollider2D m_destroyCollider;
     public float maxVertChange, minVertChange;
+    
+    public float extraPairSpacing;
 
     public Vector3 m_spawnOrigin;
 
@@ -26,7 +28,8 @@ public class ObstacleManager : MonoBehaviour {
     }
 
 	public void Reset () {
-		destroyAll ();
+		extraPairSpacing = 25f;
+        destroyAll ();
 		Start ();
 	}
 	
@@ -83,6 +86,7 @@ public class ObstacleManager : MonoBehaviour {
         
         //Randomise obstacle height
         AdjustObstacleHeight(newObs, Random.Range (minVertChange, maxVertChange));
+        AdjustObstacleSpacing(newObs);
 		newObs.transform.parent = this.transform;
         newObs.name = "Pair " + obstNum;
         obstNum++;
@@ -138,5 +142,17 @@ public class ObstacleManager : MonoBehaviour {
         //moves it back to its original placement.
         
         obs.transform.position += new Vector3(0f, deltaHeight, 0f);
+    }
+    
+    private void AdjustObstacleSpacing(GameObject obs)
+    {
+        GameObject topObs = obs.transform.Find("Top").gameObject;
+        GameObject botObs = obs.transform.Find("Bottom").gameObject;
+        topObs.transform.position = new Vector3(topObs.transform.position.x, topObs.transform.position.y + extraPairSpacing, topObs.transform.position.z);
+        botObs.transform.position = new Vector3(botObs.transform.position.x, botObs.transform.position.y - extraPairSpacing, botObs.transform.position.z);
+        if(extraPairSpacing > 0)
+        {
+            extraPairSpacing -= 5;
+        }
     }
 }
