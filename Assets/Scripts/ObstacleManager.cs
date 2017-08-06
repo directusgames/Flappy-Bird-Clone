@@ -11,13 +11,15 @@ public class ObstacleManager : MonoBehaviour {
     public float maxVertChange, minVertChange;
     
     public float extraPairSpacing;
-
     public Vector3 m_spawnOrigin;
-
+    
 	// Poor form, but quick.
 	private Vector3 m_pairOne = new Vector3(50f, 50f, 1f);
    
     private int obstNum = 0;
+    
+    //Obstacle movement increase rate
+    public float speedIncrease = 0.05f;
 
 	// Use this for initialization
 	public void Start () {
@@ -28,6 +30,8 @@ public class ObstacleManager : MonoBehaviour {
     }
 
 	public void Reset () {
+        Time.timeScale = 1f;
+        obstNum = 0;
 		extraPairSpacing = 25f;
         destroyAll ();
 		Start ();
@@ -89,6 +93,11 @@ public class ObstacleManager : MonoBehaviour {
         AdjustObstacleSpacing(newObs);
 		newObs.transform.parent = this.transform;
         newObs.name = "Pair " + obstNum;
+        if(obstNum > 5)
+        {
+            Time.timeScale += 0.05f;
+        }
+        
         obstNum++;
 		m_obstacleObjects.Add (newObs);
 		return newObs;
