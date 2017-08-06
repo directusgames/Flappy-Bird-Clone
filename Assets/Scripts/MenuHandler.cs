@@ -11,7 +11,6 @@ public class MenuHandler : MonoBehaviour {
     public ScrollBackground scrollBG;
 
 	public GameObject m_mainMenu;
-	public GameObject m_settingsMenu;
 	public GameObject m_deathMenu;
     
 	public Text txtScore;
@@ -23,11 +22,8 @@ public class MenuHandler : MonoBehaviour {
 	public Text m_score;
 	public Text m_highScore;
     
-    bool firstRun;
-
 	// Use this for initialization
 	void Start () {
-    	firstRun = true;
 	}
 
 	public void startGame() {
@@ -63,13 +59,11 @@ public class MenuHandler : MonoBehaviour {
 		GameObject.Find ("Player").GetComponent<PlayerMovement> ().Start ();
 		m_mainMenu.SetActive (true);
 		txtScore.enabled = false;
-		m_settingsMenu.SetActive (false);
 		m_deathMenu.SetActive (false);
 	}
 
 	public void settingsMenu() {
 		m_mainMenu.SetActive (false);
-		m_settingsMenu.SetActive (true);
 	}
 
 	public void deathMenu() {
